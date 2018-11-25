@@ -1,4 +1,6 @@
-# Proposal project january 2019  
+# Proposal project january 2019
+
+## Airplane crashes and fatalities since 1908
 
 ## Problem set  
 Since the first aircraft was designed by the Wright brothers there has been a lot of accidents. There are a lot of different kind of accidents with one or more fatalities. The problem I would like to solve is a visualization of the number and information of airplane crashes over the period 1908 - 2009.  
