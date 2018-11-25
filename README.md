@@ -46,5 +46,10 @@ The bold headers are the headers I am using in my project.
   I am not sure yet of all the libraries because I haven't seen all the libraries.
 
 * The hardest parts of implementing are:
-  * The dataset contains 5268 crashes so parsing the data will be challenge
+  * The dataset contains 5268 crashes so parsing the data will be a challenge
   * The location is separated in place and country. So implementing the world map only on country or/and place.
+  * The world map
+
+## Author
+Max Simons
+12389285
