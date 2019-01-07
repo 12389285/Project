@@ -14,10 +14,10 @@ I want to create a website where it is possible to see all kind of graphics with
 In this problem set I want to visualize:
 1) A world map with the number of incidents per year (MVP).
 2) A line chart with the the total of incidents over all the years (MVP).
-3) A line chart with the fatal incidents. (MVP)
-4) A line chart with the non fatal incidents. (MVP)
-5) A bar chart showing the fatal and non fatal per year. (optional)
-6) A bar chart with all years per country.
+3) A multiple line chart with the fatal and none fatal incidents. (MVP)
+4) A bar chart showing the fatal and non fatal per year. (optional)
+5) A bar chart with all years per country.
+6) A multiple line chart with world/asia/USA/Europa
 
 ## Prerequisites
 
