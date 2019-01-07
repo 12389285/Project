@@ -17,7 +17,7 @@ In this problem set I want to visualize:
 3) A multiple line chart with the fatal and none fatal incidents. (MVP)
 4) A bar chart showing the fatal and non fatal per year. (optional)
 5) A bar chart with all years per country.
-6) A multiple line chart with world/asia/USA/Europa
+6) A multiple line chart with World/Asia/USA/Europa
 
 ## Prerequisites
 

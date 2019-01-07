@@ -1,0 +1,200 @@
+/* fill viewport, hide scroll bar */
+html, body
+{
+    height: 100%;
+    overflow: scroll;
+    background: #F4F5F5;
+}
+
+/* ensure content is below navbar */
+div.container-fluid
+{
+    padding: 0em 5em 3em 5em;
+}
+
+svg {
+    border-radius: 6px;
+    background-color: white;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0 1px 5px #ddd;
+}
+
+/* fill viewport */
+div.container-fluid, div.row, div.col, div.jumbotron
+{
+    height: 100%;
+    margin-right: -80px;
+    margin-left: -20px;
+}
+
+/* remove padding within column */
+div.col
+{
+    padding-left: 0;
+    padding-right: 0;
+}
+
+/* add padding around form */
+form
+{
+    padding: 15px;
+}
+
+/* wrap and scroll preformatted text */
+pre
+{
+    height: 100%;
+    overflow: auto;
+    padding: 15px;
+    white-space: pre-wrap;
+}
+
+.title {
+  font-family: sans-serif;
+  font-size: 20px;
+  fill: black;
+}
+
+/* Add a black background color to the top navigation */
+.topnav {
+    background-color: grey;
+    overflow: hidden;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+    float: left;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+    background-color: lightgrey;
+    color: black;
+}
+
+/* Add a color to the active/current link */
+.topnav a.active {
+    background-color: grey;
+    color: white;
+}
+
+/* Columns*/
+p
+{
+  font-family: Arial;
+  text-align: justify;
+  padding-top: 25px;
+  padding-left: 25px;
+}
+
+#compare
+{
+    font-size: 18px;
+}
+
+.names {
+  fill: none;
+  stroke: #fff;
+  stroke-linejoin: round;
+  }
+
+.d3-tip {
+line-height: 1.5;
+font-weight: 400;
+font-family: Arial, sans-serif;
+padding: 6px;
+background: rgba(0, 0, 0, 0.6);
+color: #FFA500;
+border-radius: 1px;
+pointer-events: none;
+}
+
+/* Creates a small triangle extender for the tooltip */
+.d3-tip:after {
+  box-sizing: border-box;
+  display: inline;
+  font-size: 8px;
+  width: 100%;
+  line-height: 1.2;
+  color: rgba(0, 0, 0, 0.6);
+  position: absolute;
+  pointer-events: none;
+
+}
+
+/* Northward tooltips */
+.d3-tip.n:after {
+  content: "\25BC";
+  margin: -1px 0 0 0;
+  top: 100%;
+  left: 0;
+  text-align: center;
+}
+
+/* Eastward tooltips */
+.d3-tip.e:after {
+  content: "\25C0";
+  margin: -4px 0 0 0;
+  top: 50%;
+  left: -8px;
+}
+
+/* Southward tooltips */
+.d3-tip.s:after {
+  content: "\25B2";
+  margin: 0 0 1px 0;
+  top: -8px;
+  left: 0;
+  text-align: center;
+}
+
+/* Westward tooltips */
+.d3-tip.w:after {
+  content: "\25B6";
+  margin: -4px 0 0 -1px;
+  top: 50%;
+  left: 100%;
+}
+
+.details{
+  color: white;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+footer {
+    border-top: .05rem;
+    background-color: lightgrey;
+    padding: 15px;
+}
+
+.bar {
+    fill: grey;
+}
+
+.label {
+  font-family: sans-serif;
+  font-size: 5px;
+  fill: black;
+}
+
+.dropdown {
+  color: grey;
+  margin-left: 0px;
+  margin-top: 400px;
+}
+
+.legendThreshold {
+  font-size: 12px;
+  font-family: sans-serif;
+}
+
+.caption {
+  fill: #000;
+  text-anchor: start;
+  font-weight: bold;
+}
