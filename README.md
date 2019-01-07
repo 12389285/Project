@@ -1,54 +1,43 @@
 # Proposal project january 2019
 
-## Airplane crashes and fatalities since 1908
+## Terrorism incidents in the world
 
 ## Problem set  
-Since the first aircraft was designed by the Wright brothers there has been a lot of accidents. There are a lot of different kind of accidents with one or more fatalities. The problem I would like to solve is a visualization of the number and information of airplane crashes over the period 1908 - 2009.  
+Over the years there are more terrorist attacks then there are used to be. I want to do a research on the amount of incidents, fatal and non fatal of terrorism.
 
-_Which country has the most fatal aircraft accidents in the history?_
+_Which country has the most terrorism incidents in the world?_
 
 ## Solution
 
-I want to create a website where it is possible to see all kind of graphics with the use of line charts, bar charts and a world map of the aircraft accidents starting with the year 1908 up till 2009.
+I want to create a website where it is possible to see all kind of graphics with the use of line charts, bar charts and a world map of the amount of terrorism incidents in the world between 1970 and 2017.
 
 In this problem set I want to visualize:
-1) A world map with the number of crashes per location in color (MVP)
-2) A bar chart with the number per operator/airline (MVP)
-3) A line chart with the the total of crashes over all the years (MVP)
-4) Number of people aboard and number of fatalities (MVP)
-5) Frequency of aircraft type (optional)
-6) Military vs private vs passenger (optional)
+1) A world map with the number of incidents per year (MVP).
+2) A line chart with the the total of incidents over all the years (MVP).
+3) A line chart with the fatal incidents. (MVP)
+4) A line chart with the non fatal incidents. (MVP)
+5) A bar chart showing the fatal and non fatal per year. (optional)
+6) A bar chart with all years per country.
 
 ## Prerequisites
 
-* The data I am using I found it with Google Dataset search and it is a CSV file from Kaggle. The Columns contain the following headers:
-  * __Date__
-  * Time
-  * __Location__
-  * __Operator__
-  * Flight#
-  * Route
-  * __Type__
-  * Registration
-  *	cn/In
-  *	__Aboard__
-  *	__Fatalities__
-  *	Ground
-  *	Summary
-
-The bold headers are the headers I am using in my project.
+* The data I am using I found on the internet are 3 CSV files, converted to JSON.
+  1) Terrorism incidents
+  2) Fatal incidents
+  3) Non fatal incidents
 
 * The libraries I think of using:
   * d3
   * matplotlib
   * SQlite
 
-  I am not sure yet of all the libraries because I haven't seen all the libraries.
-
 * The hardest parts of implementing are:
-  * The dataset contains 5268 crashes so parsing the data will be a challenge
-  * The location is separated in place and country. So implementing the world map only on country or/and place.
   * The world map
+  * Updating the map and other charts
+
+## Source
+
+data source: https://ourworldindata.org/terrorism
 
 ## Author
 Max Simons
