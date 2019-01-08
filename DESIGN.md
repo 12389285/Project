@@ -92,6 +92,12 @@ This way the disadvantage is that the countries are lined up beneath each other 
 ```
 This way I have a better overview of the data. The converter is located in data/converterCSV2JSON.py
 
+## Pages
+
+* Home: In this page the user can find information and background about the subject.
+* Terrorism: This page contains the visualization of the project.
+* Data: The user can visit the main source and download the CSV files I have used.
+
 ## Overview technical components
 
 <img width="559" alt="schermafbeelding 2019-01-08 om 11 08 35" src="https://user-images.githubusercontent.com/43987983/50824041-c91fa700-1335-11e9-92f5-c347d2184b43.png">
@@ -118,3 +124,4 @@ In this multiple line chart the user can see the data of different places/contin
 * d3-colorbar
 * d3-rect
 * d3-legend
+* d3-tip

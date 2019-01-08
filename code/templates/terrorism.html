@@ -18,22 +18,25 @@
         <script src="http://d3js.org/queue.v1.min.js"></script>
         <script src="http://d3js.org/topojson.v1.min.js"></script>
         <script src="../d3-tip.js"></script>
-        <script src="../javascript/map.js"></script>
+        <script src="../javascript/visualization.js"></script>
 
         <title>Terrorism</title>
     </head>
     <body>
       <header>
         <div class="topnav">
-            <a class="navbar-brand" href="https://12389285.github.io/DataProcessing/">Github</a>
             <a class="navbar-brand" href="../index.html">Home</a>
             <a class="navbar-brand" href="terrorism.html">Terrorism</a>
-            <a class="navbar-brand" href="templates/data.html">Data</a>
+            <a class="navbar-brand" href="data.html">Data</a>
 
         </div>
       </header>
       <div class="container-fluid text-center">
         <h2>Terrorism</h2>
+        <div class="W-100">
+          <hr size="20px">
+        </div>
+
         <!-- <div class="btn-group pull-center">
           <button type="button" data-toggle="dropdown" id="dropdownMenuButton">
              Year <span class="caret"></span>
@@ -48,17 +51,24 @@
         </div> -->
         <div class="row">
           <div class="col-7" id="map">
-            <h3>World map</h3>
+            <h3>Number of terrorist attacks</h3>
+            <p>In the past 50 years there have been a lot of attacks arround the world. The visualization below shows the number of attacks global and per country. When using the slider the data updates by year. By selecting a country the barchart on the right will update and visualize the number of attacks between 1970 and 2017. In some cases there is no data available for that year or country.</p>
           </div>
           <div class="col-5" id="barchart">
             <h3>1970-2017</h3>
           </div>
+          <div class="row">
+            <div class="col-7" id="linechartleft">
+              <h3>Number of fatalities and injuries</h3>
+              <p>The visualization below shows the number of fatel incidents and the number of injuries per countrie. While selecting a country above the line chart will update. The number of fatal and non fatel incidents will show between 1970 and 2017.</p>
+            </div>
+          </div>
         </div>
       </div>
-      <footer class="text-center">
+      <!-- <footer class="text-center">
         <div>
             <span class="text">Max Simons // 12389285 // University Of Amsterdam // 2018</span>
         </div>
-      </footer>
+      </footer> -->
     </body>
 </html>

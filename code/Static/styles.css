@@ -3,7 +3,7 @@ html, body
 {
     height: 100%;
     overflow: scroll;
-    background: #F4F5F5;
+    background: #F4F5F5 !important;
 }
 
 /* ensure content is below navbar */
@@ -13,25 +13,36 @@ div.container-fluid
 }
 
 svg {
-    border-radius: 6px;
+    border-radius: 2px;
     background-color: white;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     box-shadow: 0 1px 5px #ddd;
 }
 
 /* fill viewport */
-div.container-fluid, div.row, div.col, div.jumbotron
+div.container-fluid, div.row, div.jumbotron
 {
     height: 100%;
-    margin-right: -80px;
-    margin-left: -20px;
+    margin-right: 0px;
+    margin-left: 0px;
 }
 
 /* remove padding within column */
-div.col
+div.col-5#barchart
 {
-    padding-left: 0;
-    padding-right: 0;
+    padding-left: 70px;
+    padding-top: 112px;
+}
+div.col-7#map
+{
+    padding-top: 0px;
+    padding-left: 0px;
+    padding-bottom: 50px;
+}
+div.col-7#linechartleft
+{
+    padding-top: 0px;
+    padding-left: 0px;
 }
 
 /* add padding around form */
@@ -50,7 +61,7 @@ pre
 }
 
 .title {
-  font-family: sans-serif;
+  font-family: Times;
   font-size: 20px;
   fill: black;
 }
@@ -63,6 +74,7 @@ pre
 
 /* Style the links inside the navigation bar */
 .topnav a {
+    font-family: Times !important;
     float: left;
     color: white;
     text-align: center;
@@ -86,13 +98,33 @@ pre
 /* Columns*/
 p
 {
-  font-family: Arial;
+  font-family: Times !important;
   text-align: justify;
-  padding-top: 25px;
-  padding-left: 25px;
+}
+h2
+{
+  font-family: Times !important;
+  padding-top: 20px;
+}
+h3
+{
+  font-family: Times !important;
+  font-size: 20px !important;
+  text-align: left !important;
+}
+li {
+  font-family: Times;
 }
 
-#compare
+footer
+{
+    border-top: .05rem;
+    background-color: lightgrey;
+    padding: 15px;
+
+}
+
+/* #compare
 {
     font-size: 18px;
 }
@@ -106,7 +138,7 @@ p
 .d3-tip {
 line-height: 1.5;
 font-weight: 400;
-font-family: Arial, sans-serif;
+font-family: Times, sans-serif;
 padding: 6px;
 background: rgba(0, 0, 0, 0.6);
 color: #FFA500;
@@ -115,7 +147,8 @@ pointer-events: none;
 }
 
 /* Creates a small triangle extender for the tooltip */
-.d3-tip:after {
+
+/* .d3-tip:after {
   box-sizing: border-box;
   display: inline;
   font-size: 8px;
@@ -125,59 +158,60 @@ pointer-events: none;
   position: absolute;
   pointer-events: none;
 
-}
+} */
 
 /* Northward tooltips */
-.d3-tip.n:after {
+
+/* .d3-tip.n:after {
   content: "\25BC";
   margin: -1px 0 0 0;
   top: 100%;
   left: 0;
   text-align: center;
-}
+} */
 
 /* Eastward tooltips */
-.d3-tip.e:after {
+
+/* .d3-tip.e:after {
   content: "\25C0";
   margin: -4px 0 0 0;
   top: 50%;
   left: -8px;
-}
+} */
 
 /* Southward tooltips */
-.d3-tip.s:after {
+
+/* .d3-tip.s:after {
   content: "\25B2";
   margin: 0 0 1px 0;
   top: -8px;
   left: 0;
   text-align: center;
-}
+} */
 
 /* Westward tooltips */
-.d3-tip.w:after {
+
+/* .d3-tip.w:after {
   content: "\25B6";
   margin: -4px 0 0 -1px;
   top: 50%;
   left: 100%;
-}
+} */
 
-.details{
+/* .details{
   color: white;
   background-color: rgba(0, 0, 0, 0);
+} */
+
+
 }
 
-footer {
-    border-top: .05rem;
-    background-color: lightgrey;
-    padding: 15px;
-}
-
-.bar {
+/* .bar {
     fill: grey;
-}
-
+}  */
+/*
 .label {
-  font-family: sans-serif;
+  font-family: Times;
   font-size: 5px;
   fill: black;
 }
@@ -190,11 +224,11 @@ footer {
 
 .legendThreshold {
   font-size: 12px;
-  font-family: sans-serif;
+  font-family: Times;
 }
 
 .caption {
   fill: #000;
   text-anchor: start;
   font-weight: bold;
-}
+} */
