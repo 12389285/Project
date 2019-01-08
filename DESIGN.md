@@ -94,7 +94,7 @@ This way I have a better overview of the data. The converter is located in data/
 
 ## Overview technical components
 
-<img width="552" alt="schermafbeelding 2019-01-08 om 10 44 28" src="https://user-images.githubusercontent.com/43987983/50822797-da1ae900-1332-11e9-88d0-8eed7f60f065.png">
+<img width="559" alt="schermafbeelding 2019-01-08 om 11 08 35" src="https://user-images.githubusercontent.com/43987983/50824041-c91fa700-1335-11e9-92f5-c347d2184b43.png">
 
 ### World map
 
