@@ -9,7 +9,8 @@ html, body
 /* ensure content is below navbar */
 div.container-fluid
 {
-    padding: 0em 5em 3em 5em;
+    padding: 0em 5em 0em 5em;
+    padding-bottom: 0px;
 }
 
 svg {
@@ -37,7 +38,7 @@ div.col-7#map
 {
     padding-top: 0px;
     padding-left: 0px;
-    padding-bottom: 50px;
+    padding-bottom: 5px;
 }
 div.col-7#linechartleft
 {
@@ -123,11 +124,11 @@ footer
     padding: 15px;
 
 }
-
-/* #compare
+/*
+#compare
 {
     font-size: 18px;
-}
+} */
 
 .names {
   fill: none;
@@ -148,7 +149,7 @@ pointer-events: none;
 
 /* Creates a small triangle extender for the tooltip */
 
-/* .d3-tip:after {
+.d3-tip:after {
   box-sizing: border-box;
   display: inline;
   font-size: 8px;
@@ -158,52 +159,49 @@ pointer-events: none;
   position: absolute;
   pointer-events: none;
 
-} */
+}
 
 /* Northward tooltips */
 
-/* .d3-tip.n:after {
+.d3-tip.n:after {
   content: "\25BC";
   margin: -1px 0 0 0;
   top: 100%;
   left: 0;
   text-align: center;
-} */
+}
 
 /* Eastward tooltips */
 
-/* .d3-tip.e:after {
+.d3-tip.e:after {
   content: "\25C0";
   margin: -4px 0 0 0;
   top: 50%;
   left: -8px;
-} */
+}
 
 /* Southward tooltips */
 
-/* .d3-tip.s:after {
+.d3-tip.s:after {
   content: "\25B2";
   margin: 0 0 1px 0;
   top: -8px;
   left: 0;
   text-align: center;
-} */
+}
 
 /* Westward tooltips */
 
-/* .d3-tip.w:after {
+.d3-tip.w:after {
   content: "\25B6";
   margin: -4px 0 0 -1px;
   top: 50%;
   left: 100%;
-} */
+}
 
-/* .details{
+.details{
   color: white;
   background-color: rgba(0, 0, 0, 0);
-} */
-
-
 }
 
 /* .bar {
