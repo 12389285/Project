@@ -18,9 +18,7 @@ Promise.all(requests).then(function(response) {
   var dataFatal = response[2];
   var dataNon_fatal = response[3];
 
-  console.log(dataIncidents);
-
-  svgset(data, dataIncidents);
+  svgset(data, dataIncidents, dataFatal, dataNon_fatal);
 
   // on click function for update map
   // d3.selectAll(".m")
@@ -39,7 +37,7 @@ Promise.all(requests).then(function(response) {
     throw(e);
 });
 
-function svgset(data, dataIncidents) {
+function svgset(data, dataIncidents, dataFatal, dataNon_fatal) {
 
   height = 500
   widthBig = 800
@@ -69,20 +67,58 @@ function svgset(data, dataIncidents) {
       .attr('class', 'line');
 
   Map(data, dataIncidents, svgMap);
+  Barchart(data, dataIncidents, svgBar);
+  Linechart(data, dataFatal, dataNon_fatal, svgLine);
 
 }
 
-function updateMap(year) {
+function updateMap(data, dataIncidents, svgMap, year, color) {
 
-    var sliderYear = year;
+  // get year from slider
+  var year = year.getFullYear();
+  year = year.toString();
 
-    console.log(sliderYear);
+  var numberbyCode = {};
+
+  dataIncidents.forEach(function(d) { numberbyCode[d['Code|2017']] = d['Incidents|' + year]; });
+  data.features.forEach(function(d) { d['Incidents|' + year] = numberbyCode[d.id]});
+
+  // Set tooltips
+  var tip = d3.tip()
+              .attr('class', 'd3-tip')
+              .html(function(d) {
+                return "<strong>Country: </strong><span class='details'>" + d.properties.name + "<br></span>" + "<strong>Number of attacks: </strong><span class='details'>" + d['Incidents|' + year] +"</span>";
+              });
+
+  svgMap.call(tip);
+
+  // change path colors
+  svgMap.selectAll("path")
+        .style("fill", function(d) {
+          return color(numberbyCode[d.id]); })
+        .style('stroke', 'white')
+        .style('stroke-width', 1.5)
+        .style("opacity",0.8)
+        // tooltips
+        .style("stroke","grey")
+        .style('stroke-width', 0.2)
+        .on('mouseover',function(d){
+          tip.show(d);
+          d3.select(this)
+            .style("opacity", 1)
+            .style("stroke","blue")
+            .style("stroke-width",3);
+        })
+        .on('mouseout', function(d){
+          tip.hide(d);
+          d3.select(this)
+            .style("opacity", 0.8)
+            .style("stroke","grey")
+            .style("stroke-width",0.2);
+        });
 }
 
 function Map(data, dataIncidents, svgMap) {
-
-  // d3.select(".mapsvg")
-    // .remove();
 
   width = 800
   height = 450
@@ -91,13 +127,13 @@ function Map(data, dataIncidents, svgMap) {
   var tip = d3.tip()
               .attr('class', 'd3-tip')
               .html(function(d) {
-                return "<strong>Country: </strong><span class='details'>" + d.properties.name + "<br></span>" + "<strong>Number of attacks: </strong><span class='details'>" + d['Incidents|2017'] +"</span>";
+                return "<strong>Country: </strong><span class='details'>" + d.properties.name + "<br></span>" + "<strong>Number of attacks: </strong><span class='details'>" + d['Incidents|1970'] +"</span>";
               })
 
   // colorscale for countries
   var color = d3.scaleThreshold()
-      .domain([0,5,10,50,100,500,1000,2000,3000,6000])
-      .range(["#ffffff", "#e6e6ff", "#ccccff", "#8080ff", "#4d4dff","##3333ff","#0000ff","#0000cc","##000099", "#000066"]);
+      .domain([0,1,5,10,50,100,500,1000,2000,3000,6000])
+      .range(["#ffffff", "#ffffff", "#e6e6ff", "#ccccff", "#8080ff", "#4d4dff","#3333ff","#0000ff","#0000cc","##000099", "#000066"]);
 
   var path = d3.geoPath();
 
@@ -112,8 +148,8 @@ function Map(data, dataIncidents, svgMap) {
 
   var numberbyCode = {};
 
-  dataIncidents.forEach(function(d) { numberbyCode[d['Code|2017']] = d['Incidents|2017']; });
-  data.features.forEach(function(d) { d['Incidents|2017'] = numberbyCode[d.id] });
+  dataIncidents.forEach(function(d) { numberbyCode[d['Code|2017']] = d['Incidents|1970']; });
+  data.features.forEach(function(d) { d['Incidents|1970'] = numberbyCode[d.id] });
 
   // worldmap settings
   svgMap.append("g")
@@ -128,8 +164,8 @@ function Map(data, dataIncidents, svgMap) {
       .style('stroke-width', 1.5)
       .style("opacity",0.8)
       // tooltips
-        .style("stroke","white")
-        .style('stroke-width', 0.3)
+        .style("stroke","grey")
+        .style('stroke-width', 0.2)
         .on('mouseover',function(d){
           tip.show(d);
           d3.select(this)
@@ -141,16 +177,9 @@ function Map(data, dataIncidents, svgMap) {
           tip.hide(d);
           d3.select(this)
             .style("opacity", 0.8)
-            .style("stroke","white")
-            .style("stroke-width",0.3);
+            .style("stroke","grey")
+            .style("stroke-width",0.2);
         });
-
-  // update barchart with all years
-
-  // d3.selectAll("path")
-  //   .on("click", function(d) {
-  //     Barchart(co2, d.properties.name, svgBar)
-  //   })
 
   svgMap.append("path")
       .datum(topojson.mesh(data.features, function(a, b) {
@@ -170,10 +199,10 @@ function Map(data, dataIncidents, svgMap) {
     .step(1000 * 60 * 60 * 24 * 365)
     .width(750)
     .tickFormat(d3.timeFormat('%Y'))
-    // .default(new Date(1998, 10, 3))
-    .on('onchange', val => {
-      d3.select('p#value-time').text(d3.timeFormat('%Y')(val));
-    });
+      .on('onchange', val => {
+        updateMap(data, dataIncidents, svgMap, val, color)
+        d3.select('#mapyear').text(d3.timeFormat('%Y')(val));
+      });
 
   var gTime = d3
     .select('div#slider-time')
@@ -185,10 +214,80 @@ function Map(data, dataIncidents, svgMap) {
 
   gTime.call(sliderTime);
 
-  var year = d3.select('p#value-time').text(d3.timeFormat('%Y')(sliderTime.value()));
+  d3.select('.mapsvg')
+      .append("text")
+        .style("font-size", "25px")
+        .attr("id", "mapyear")
+        .attr("x", 30)
+        .attr("y", 40)
+        .text(d3.timeFormat('%Y')(sliderTime.value()));
 
-  console.log(year);
+  // update barchart with all years
 
-  updateMap(year)
+  // d3.selectAll("path")
+  //   .on("click", function(d) {
+  //     Barchart(co2, d.properties.name, svgBar)
+  //   })
+
+  var linear = d3.scaleLinear()
+    .domain(["No data",1,5,10,50,100,500,1000,2000,3000,6000])
+    .range(["#ffffff", "#ffffff", "#e6e6ff", "#ccccff", "#8080ff", "#4d4dff","#3333ff","#0000ff","#0000cc","##000099", "#000066"]);
+
+  d3.select('.mapsvg')
+    .append("g")
+    .attr("class", "legendLinear")
+    .attr("transform", "translate(10,270)");
+
+  var legendLinear = d3.legendColor()
+    .shapeWidth(15)
+    .cells([0,1,5,10,50,100,500,1000,2000,3000,6000])
+    .orient('vertical')
+    .scale(linear);
+
+  svgMap = d3.select('.mapsvg');
+
+  svgMap.select(".legendLinear")
+    .call(legendLinear);
+}
+
+function Barchart(data, dataIncidents, svgBar) {
+
+  margin = {top: 20, right: 20, bottom: 30, left: 20},
+  width = +svgBar.attr("width") - margin.left - margin.right,
+  height = +svgBar.attr("height") - margin.top - margin.bottom,
+  g = svgBar.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+  var xScale = d3.scaleBand()
+  	 .rangeRound([width, 0])
+  	 .padding(0.1);
+
+  var yScale = d3.scaleLinear()
+	   .rangeRound([height, 0]);
+
+  xScale.domain(dataIncidents.map(function (d) {
+   			return d["incidents|2017"];
+   		}));
+ 	yScale.domain([0, d3.max(dataIncidents, function (d) {
+        console.log(d["incidents|2017"]);
+ 				return d["incidents|2017"];
+ 			})]);
+
+ 	g.append("g")
+ 	// .attr("transform", "translate(0," + height + ")")
+ 	.call(d3.axisBottom(xScale))
+
+ 	g.append("g")
+ 	.call(d3.axisLeft(yScale))
+ 	.append("text")
+ 	.attr("fill", "#000")
+ 	// .attr("transform", "translate(20, 0)")
+ 	// .attr("y", 6)
+ 	// .attr("dy", "0.71em")
+ 	.attr("text-anchor", "end")
+ 	.text("Attacks");
+
+}
+
+function Linechart(data, dataFatal, dataNon_fatal, svgLine) {
 
 }

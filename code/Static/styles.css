@@ -46,6 +46,11 @@ div.col-7#linechartleft
     padding-left: 0px;
 }
 
+.legendLinear {
+  padding-top: 200px !important;
+  padding-left: 100px !important;
+}
+
 /* add padding around form */
 form
 {
@@ -131,7 +136,7 @@ footer
 } */
 
 .names {
-  fill: none;
+  fill: white;
   stroke: #fff;
   stroke-linejoin: round;
   }
