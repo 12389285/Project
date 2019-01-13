@@ -209,9 +209,15 @@ pointer-events: none;
   background-color: rgba(0, 0, 0, 0);
 }
 
-/* .bar {
+.grid line {
+  stroke: grey;
+  stroke-opacity: 0.7;
+  shape-rendering: crispEdges;
+}
+
+.bar {
     fill: grey;
-}  */
+} 
 /*
 .label {
   font-family: Times;
