@@ -40,10 +40,18 @@
 * Problems with making barchart with different bars
 * Fixed Problems with using a different way of code
 * Working barchart with choose of the country and year to see in barchart
+* Add a barcounter to count the bars and used a function to add the bar in the chart
 
 ## Day 6
 
 15/01/2019
 
-* Fixing xaxis name of country and years
-* 
+* Fixing x axis name of country and years
+* Trouble with rotating the x axis text
+* Changed color of bar in theme of site
+* Changed the amount of color function in map because the maximum is not 6000 but 3300 attacks
+* Changed the text and place of reset button
+* Added a text to warn the user to reset the bars
+
+<img width="1350" alt="schermafbeelding 2019-01-15 om 23 02 39" src="https://user-images.githubusercontent.com/43987983/51213158-90c22f00-191a-11e9-909a-9c897bd1aafd.png">
+<img width="1356" alt="schermafbeelding 2019-01-15 om 23 10 08" src="https://user-images.githubusercontent.com/43987983/51213245-c8c97200-191a-11e9-9725-fcf2186b378c.png">

@@ -32,7 +32,7 @@ div.container-fluid, div.row, div.jumbotron
 div.col-5#barchart
 {
     padding-left: 70px;
-    padding-top: 83px;
+    padding-top: 19px;
 }
 div.col-7#map
 {
@@ -132,11 +132,6 @@ footer
     padding: 15px;
 
 }
-/*
-#compare
-{
-    font-size: 18px;
-} */
 
 .names {
   fill: white;
@@ -221,6 +216,10 @@ pointer-events: none;
 .bar {
     fill: grey;
 }
+.bar:hover {
+  fill: lightgrey;
+}
+
 /*
 .label {
   font-family: Times;

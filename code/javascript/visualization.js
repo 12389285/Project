@@ -130,7 +130,7 @@ function Map(data, dataIncidents, svgMap, svgBar, svgLine, dataFatal, dataNon_fa
 
   // colorscale for countries
   var color = d3.scaleThreshold()
-      .domain([0,1,5,10,50,100,500,1000,2000,3000,6000])
+      .domain([0,1,5,50,100,250,500,1000,1500,2000,3500])
       .range(["#ffffff", "#ffffff", "#e6e6ff", "#ccccff", "#8080ff", "#4d4dff","#3333ff","#0000ff","#0000cc","##000099", "#000066"]);
 
   var path = d3.geoPath();
@@ -230,7 +230,7 @@ function Map(data, dataIncidents, svgMap, svgBar, svgLine, dataFatal, dataNon_fa
         .text(d3.timeFormat('%Y')(sliderTime.value()));
 
   var linear = d3.scaleLinear()
-    .domain(["No data",1,5,10,50,100,500,1000,2000,3000,6000])
+    .domain([0,1,5,50,100,250,500,1000,1500,2000,3500])
     .range(["#ffffff", "#ffffff", "#e6e6ff", "#ccccff", "#8080ff", "#4d4dff","#3333ff","#0000ff","#0000cc","##000099", "#000066"]);
 
   d3.select('.mapsvg')
@@ -240,7 +240,7 @@ function Map(data, dataIncidents, svgMap, svgBar, svgLine, dataFatal, dataNon_fa
 
   var legendLinear = d3.legendColor()
     .shapeWidth(15)
-    .cells([0,1,5,10,50,100,500,1000,2000,3000,6000])
+    .cells([0,1,5,50,100,250,500,1000,1500,2000,3500])
     .orient('vertical')
     .scale(linear);
 
@@ -297,7 +297,7 @@ function Barchart(data, dataIncidents, svgBar, country, number, year) {
 
   // make y_scale
   var yScale = d3.scaleLinear()
-    .domain([0, 3000])
+    .domain([0, 3500])
     .range([height, margin.top]);
 
   var xAxis = d3.axisBottom()
@@ -342,6 +342,19 @@ function Barchart(data, dataIncidents, svgBar, country, number, year) {
       .attr("transform", "translate(40," + 0 + ")")
       .call(yAxis);
 
+    // gridlines in y axis function
+    function gridLines() {
+        return d3.axisLeft(yScale)
+            .ticks(6)};
+
+    // add the Y gridlines
+    svgBar.append("g")
+        .attr("class", "grid")
+        .style("stroke-dasharray",("3,3"))
+        .attr("transform", "translate(40," + 0 + ")")
+        .call(gridLines()
+            .tickSize(- width + margin.right)
+            .tickFormat(""));
   }
 
   // First bar
@@ -386,7 +399,7 @@ function Barchart(data, dataIncidents, svgBar, country, number, year) {
       .attr("font-size","20px")
       .attr("fill", "black")
       .attr("x", 250)
-      .attr("y", 30)
+      .attr("y", 60)
       .style("text-anchor", "middle")
       .text("Please reset barchart")
   }
