@@ -32,3 +32,18 @@
 11/01/2019
 
 * Made the axis for bar and line chart
+
+## Day 5
+
+14/01/2019
+
+* Problems with making barchart with different bars
+* Fixed Problems with using a different way of code
+* Working barchart with choose of the country and year to see in barchart
+
+## Day 6
+
+15/01/2019
+
+* Fixing xaxis name of country and years
+* 

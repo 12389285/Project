@@ -10,6 +10,9 @@ var requests = [d3.json(world_countries), d3.json(incidents), d3.json(fatal), d3
 
 var dataset = 0
 
+var barCounter = 0
+
+
 Promise.all(requests).then(function(response) {
   dataset = response
 
@@ -53,13 +56,13 @@ function svgset(data, dataIncidents, dataFatal, dataNon_fatal) {
       .append('g')
       .attr('class', 'line');
 
-  Map(data, dataIncidents, svgMap, svgBar);
+  Map(data, dataIncidents, svgMap, svgBar, svgLine, dataFatal, dataNon_fatal);
   Barchart(data, dataIncidents, svgBar);
   Linechart(data, dataFatal, dataNon_fatal, svgLine);
 
 }
 
-function updateMap(data, dataIncidents, svgMap, year, color, svgBar) {
+function updateMap(data, dataIncidents, svgMap, year, color, svgBar, svgLine, dataFatal, dataNon_fatal) {
 
   // get year from slider
   var year = year.getFullYear();
@@ -107,13 +110,13 @@ function updateMap(data, dataIncidents, svgMap, year, color, svgBar) {
     // update barchart with all years
     d3.selectAll("path")
       .on("click", function(d) {
-        console.log(d.properties.name);
-        console.log(d['Incidents|' + year]);
+        barCounter += 1;
         Barchart(data, dataIncidents, svgBar, d.properties.name, d['Incidents|' + year], year);
+        Lines(data, dataFatal, dataNon_fatal, svgLine, d['Incidents|' + year]);
       });
 }
 
-function Map(data, dataIncidents, svgMap, svgBar) {
+function Map(data, dataIncidents, svgMap, svgBar, svgLine, dataFatal, dataNon_fatal) {
 
   width = 800
   height = 450
@@ -179,9 +182,10 @@ function Map(data, dataIncidents, svgMap, svgBar) {
   // update barchart with all years
   d3.selectAll("path")
     .on("click", function(d) {
-      console.log(d.properties.name);
-      console.log(d['Incidents|1970']);
-      Barchart(data, dataIncidents, svgBar, d.properties.name, d['Incidents|1970']);
+      barCounter += 1;
+      year = 1970
+      Barchart(data, dataIncidents, svgBar, d.properties.name, d['Incidents|1970'], year);
+      Lines(data, dataFatal, dataNon_fatal, svgLine, d.properties.name);
     });
 
   svgMap.append("path")
@@ -203,7 +207,7 @@ function Map(data, dataIncidents, svgMap, svgBar) {
     .width(750)
     .tickFormat(d3.timeFormat('%Y'))
       .on('onchange', val => {
-        updateMap(data, dataIncidents, svgMap, val, color, svgBar)
+        updateMap(data, dataIncidents, svgMap, val, color, svgBar, svgLine, dataFatal, dataNon_fatal)
         d3.select('#mapyear').text(d3.timeFormat('%Y')(val));
       });
 
@@ -246,13 +250,13 @@ function Map(data, dataIncidents, svgMap, svgBar) {
     .call(legendLinear);
 }
 
-function AddBar(data, dataIncidents, svgBar, xScale, yScale, margin, width, height, country, number) {
+function AddBar(data, dataIncidents, svgBar, xScale, yScale, margin, width, height, country, number, year) {
   // add the horizontal bars
   svgBar.append("rect")
       .attr("class", "bar")
       // vraag over i * 50
       .attr("x", function (d,i) {
-          bars = (i * 30) + 118;
+          bars = (barCounter * 40) + 20;
           return bars;
       })
       .attr("width", 20)
@@ -262,9 +266,23 @@ function AddBar(data, dataIncidents, svgBar, xScale, yScale, margin, width, heig
       .attr("height", function (d) {
         return height - yScale(number);
       });
+
+  // create xaxis
+  svgBar.append("text")
+    .attr("class", "xText")
+    .attr("font-size","10px")
+    .attr("fill", "black")
+    .attr("x", (barCounter * 40) + 20)
+    .attr("y", 455)
+    .style("text-anchor", "middle")
+    // .attr("transform", "translate(-296,200)rotate(-45)")
+    // .attr("transform", "rotate(-45)" )
+    .text(country + "," + year)
 }
 
 function Barchart(data, dataIncidents, svgBar, country, number, year) {
+
+  console.log(barCounter);
 
   margin = {top: 20, right: 20, bottom: 50, left: 20},
   width = 500 - margin.left - margin.right,
@@ -279,94 +297,105 @@ function Barchart(data, dataIncidents, svgBar, country, number, year) {
 
   // make y_scale
   var yScale = d3.scaleLinear()
-    .domain([0, 2000])
+    .domain([0, 3000])
     .range([height, margin.top]);
 
   var xAxis = d3.axisBottom()
     .scale(xScale)
-    // .ticks(country + "," + year);
-    // .tickFormat(d3.format(".0f"));
+    .ticks(0)
 
   var yAxis = d3.axisLeft()
     .scale(yScale);
 
-  // append group and insert axis
-  var gX = svgBar.append("g")
-    .attr("class", "xaxis")
-    .attr("transform", "translate(20," + height + ")")
-    .call(xAxis)
-      .select("text")
-        .text(country + ',' + year)
-        .style("text-anchor", "end")
-        .attr("transform", "rotate(-45)" )
-
-    // append group and insert axis
-  var gY = svgBar.append("g")
-    .attr("class", "yaxis")
-    .attr("transform", "translate(40," + 0 + ")")
-    .call(yAxis);
-
   // resetten
   function Reset() {
-      return svgBar.selectAll("rect")
-                      .remove()
-                   .selectAll("text")
-                      .remove()
-              };
+      barCounter = 0;
+      bars = svgBar.selectAll("rect")
+                      .remove();
+
+      xtext = svgBar.selectAll(".xText")
+                    .remove();
+
+      reset = svgBar.selectAll(".reset")
+                    .remove();
+
+      return bars, xtext
+  }
 
   d3.selectAll(".reset")
     .on("click", function(d) {
       return Reset();
-    })
-  // d3.select(".bar")
-  //   .append("button")
-  //   .text("Reset")
-  //   .attr("float", "center")
-  //   .on("click", Reset());
+    });
 
-  // add the horizontal bars
-  svgBar.append("rect")
-      .attr("class", "bar")
-      // vraag over i * 50
-      .attr("x", function (d,i) {
-          bars = (i * 30) + 75;
-          return bars;
-      })
-      .attr("width", 20)
-      .attr("y", function (d) {
-          return yScale(number);
-      })
-      .attr("height", function (d) {
-        return height - yScale(number);
-      });
+  // only insert axis ones
+  if (barCounter == 0) {
 
-  // geen x,y zichtbaar begin
-  // volgende chart
-  // NaN bij 1970
+    // append group and insert axis
+    var gX = svgBar.append("g")
+      .attr("class", "xaxis")
+      .attr("transform", "translate(20," + height + ")")
+      .call(xAxis)
 
-  AddBar(data, dataIncidents, svgBar, xScale, yScale, margin, width, height, country, number)
+      // append group and insert axis
+    var gY = svgBar.append("g")
+      .attr("class", "yaxis")
+      .attr("transform", "translate(40," + 0 + ")")
+      .call(yAxis);
 
+  }
+
+  // First bar
+  if (barCounter == 1) {
+
+    // add the horizontal bars
+    svgBar.append("rect")
+        .attr("class", "bar")
+        .attr("x", function (d,i) {
+            bars = (barCounter * 30) + 30;
+            return bars;
+        })
+        .attr("width", 20)
+        .attr("y", function (d) {
+            return yScale(number);
+        })
+        .attr("height", function (d) {
+          return height - yScale(number);
+        });
+
+      // create xaxis text
+      svgBar.append("text")
+        .attr("class", "xText")
+        .attr("font-size","10px")
+        .attr("fill", "black")
+        .attr("x", 65)
+        .attr("y", 455)
+        .style("text-anchor", "end")
+        .attr("transform", "translate(-296,162)rotate(-45)")
+        // .attr("transform", "rotate(-45)" )
+        .text(country + "," + year)
+
+  }
+
+  else if (barCounter >= 2 && barCounter <= 11) {
+    AddBar(data, dataIncidents, svgBar, xScale, yScale, margin, width, height, country, number, year);
+  }
+  else if (barCounter == 12) {
+    // create reset
+    svgBar.append("text")
+      .attr("class", "reset")
+      .attr("font-size","20px")
+      .attr("fill", "black")
+      .attr("x", 250)
+      .attr("y", 30)
+      .style("text-anchor", "middle")
+      .text("Please reset barchart")
+  }
+  else if (barCounter > 12) {
+    Reset();
+  }
 }
 
 function Linechart(data, dataFatal, dataNon_fatal, svgLine) {
-
-  // parsing data
-  world = []
-
-  worlddata = {}
-  start = 1970
-  //
-  // for(i = 0; i < 48; i++) {
-
-  // dataFatal.forEach(function(d) {
-  //   if d["Code|2017"] == WLF {
-  //     worlddata[d['Code|2017']] = d['Incidents|' + start];}
-  //
-  //   });
-  //   start += 1
-  // }
-  console.log(worlddata);
-
 
   margin = {top: 20, right: 50, bottom: 20, left: 25},
   width = 800 - margin.left - margin.right,
@@ -427,5 +456,38 @@ function Linechart(data, dataFatal, dataNon_fatal, svgLine) {
       .attr("x", -30)
     	.attr("text-anchor", "end")
     	.text("Fatalities/injuries");
+
+}
+
+function Lines(data, dataFatal, dataNon_fatal, svgLine, country){
+
+  // lineFatal = [];
+  // lineNonfatal = [];
+  //
+  // year = 1970
+  //
+  // for(i = 0; i < 300; i++) {
+  //   if (dataFatal[i]["Country"] == country) {
+  //     for (j = 0; j < 48; j++) {
+  //       lineFatal.push(dataFatal[i]["Incidents|" + year])
+  //     }
+  //   }
+  // }
+  //
+  //
+  // console.log(lineFatal);
+  // console.log(dataFatal[i]["Country"]);
+
+  // console.log(country);
+
+  //
+  // for element of dataFatal:
+  //   i = 1970
+  //   if dataFatal[element]["Country"] == country:
+  //     for i in range 48
+  //       lineFatal.push(dataFatal[element]["Incident|" + i])
+
+
+
 
 }

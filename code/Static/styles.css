@@ -32,7 +32,7 @@ div.container-fluid, div.row, div.jumbotron
 div.col-5#barchart
 {
     padding-left: 70px;
-    padding-top: 112px;
+    padding-top: 83px;
 }
 div.col-7#map
 {
@@ -70,6 +70,9 @@ pre
   font-family: Times;
   font-size: 20px;
   fill: black;
+}
+.xText {
+    /* transform: rotate(-45deg); */
 }
 
 /* Add a black background color to the top navigation */
@@ -217,7 +220,7 @@ pointer-events: none;
 
 .bar {
     fill: grey;
-} 
+}
 /*
 .label {
   font-family: Times;
