@@ -55,3 +55,10 @@
 
 <img width="1350" alt="schermafbeelding 2019-01-15 om 23 02 39" src="https://user-images.githubusercontent.com/43987983/51213158-90c22f00-191a-11e9-909a-9c897bd1aafd.png">
 <img width="1356" alt="schermafbeelding 2019-01-15 om 23 10 08" src="https://user-images.githubusercontent.com/43987983/51213245-c8c97200-191a-11e9-9725-fcf2186b378c.png">
+
+## Day 7
+
+16/01/2019
+
+* Fixed the x axis for barchart
+* Added text

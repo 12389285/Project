@@ -2,7 +2,6 @@
 html, body
 {
     height: 100%;
-    overflow: scroll;
     background: #F4F5F5 !important;
 }
 
@@ -142,6 +141,7 @@ footer
 .d3-tip {
 line-height: 1.5;
 font-weight: 400;
+position: relative;
 font-family: Times, sans-serif;
 padding: 6px;
 background: rgba(0, 0, 0, 0.6);
@@ -220,26 +220,30 @@ pointer-events: none;
   fill: lightgrey;
 }
 
-/*
-.label {
-  font-family: Times;
-  font-size: 5px;
-  fill: black;
+#linechart {
+  stroke: red;
+  fill: none;
+  stroke-opacity: 1;
 }
 
-.dropdown {
-  color: grey;
-  margin-left: 0px;
-  margin-top: 400px;
+.overlay {
+  fill: none;
+  pointer-events: all;
 }
 
-.legendThreshold {
-  font-size: 12px;
-  font-family: Times;
+/* Style the dots by assigning a fill and stroke */
+.dot {
+    fill: #ffab00;
+    stroke: #fff;
 }
 
-.caption {
-  fill: #000;
-  text-anchor: start;
-  font-weight: bold;
-} */
+/* Style the dots by assigning a fill and stroke */
+.dotN {
+    fill: #ffab00;
+    stroke: #fff;
+}
+
+.focus circle {
+fill: none;
+stroke: steelblue;
+}
