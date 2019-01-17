@@ -62,3 +62,17 @@
 
 * Fixed the x axis for barchart
 * Added text
+* Tried to update the y axis for the barchart, not working as well as I expected. After a view attempts I decided to skip this part for the barchart, maybe it might work in the linechart.
+
+# Day 8
+
+17/01/2019
+
+* Tip hide and show for lines
+* line styles
+* Added a line for world fatalities as default in linechartleft
+* Added button for world data
+* Added buttons for Asia, Europe, middle east & North Africa
+* Made update function for lines instead of remove function
+
+<img width="1343" alt="schermafbeelding 2019-01-17 om 15 28 13" src="https://user-images.githubusercontent.com/43987983/51325209-af383f80-1a6c-11e9-8532-c8cab4cea7be.png">

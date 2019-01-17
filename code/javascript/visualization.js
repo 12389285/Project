@@ -16,6 +16,8 @@ var lineCounter = 0;
 
 var positionX = 75;
 
+var barData = [];
+
 
 Promise.all(requests).then(function(response) {
   dataset = response
@@ -101,7 +103,7 @@ function updateMap(data, dataIncidents, svgMap, year, color, svgBar, svgLine, da
           d3.select(this)
             .style("opacity", 1)
             .style("stroke","blue")
-            .style("stroke-width",3);
+            .style("stroke-width",1);
         })
         .on('mouseout', function(d){
           tip.hide(d);
@@ -173,7 +175,7 @@ function Map(data, dataIncidents, svgMap, svgBar, svgLine, dataFatal, dataNon_fa
           d3.select(this)
             .style("opacity", 1)
             .style("stroke","blue")
-            .style("stroke-width",3);
+            .style("stroke-width",1);
         })
         .on('mouseout', function(d){
           tip.hide(d);
@@ -254,7 +256,7 @@ function Map(data, dataIncidents, svgMap, svgBar, svgLine, dataFatal, dataNon_fa
     .call(legendLinear);
 }
 
-function updateBar(data, dataIncidents, svgBar, xScale, yScale, margin, width, height, country, number, year) {
+function updateBar(data, dataIncidents, svgBar, xScale, yScale, margin, width, height, country, number, year, yAxis) {
 
   // create tip
   var tip = d3.tip()
@@ -272,7 +274,6 @@ function updateBar(data, dataIncidents, svgBar, xScale, yScale, margin, width, h
   // add the horizontal bars
   svgBar.append("rect")
       .attr("class", "bar")
-      // vraag over i * 50
       .attr("x", function (d,i) {
           bars = (barCounter * 40) + 20;
           return bars;
@@ -297,19 +298,6 @@ function updateBar(data, dataIncidents, svgBar, xScale, yScale, margin, width, h
       .style("text-anchor", "end")
       .attr("transform", "rotate(-45)")
       .text(country + "|" + year)
-
-  // positionX
-
-  // svgBar.append("text")
-  //   .attr("class", "xText")
-  //   .attr("font-size","10px")
-  //   .attr("fill", "black")
-  //   .attr("x", (barCounter * 40) + 20)
-  //   .attr("y", 455)
-  //   .style("text-anchor", "middle")
-  //   // .attr("transform", "translate(-296,200)rotate(-45)")
-  //   // .attr("transform", "rotate(-45)" )
-  //   .text(country + "," + year)
 }
 
 function Barchart(data, dataIncidents, svgBar, country, number, year) {
@@ -346,6 +334,8 @@ function Barchart(data, dataIncidents, svgBar, country, number, year) {
 
   // resetten
   function Reset() {
+
+      positionX = 75;
 
       barCounter = 0;
 
@@ -476,7 +466,8 @@ function Barchart(data, dataIncidents, svgBar, country, number, year) {
 
     positionX += 40;
 
-    updateBar(data, dataIncidents, svgBar, xScale, yScale, margin, width, height, country, number, year);
+    updateBar(data, dataIncidents, svgBar, xScale, yScale, margin, width, height, country, number, year, yAxis);
+
   }
 
   // warning for amount of barcharts
@@ -510,7 +501,7 @@ function Linechart(data, dataFatal, dataNon_fatal, svgLine, country) {
 
   var xScale = d3.scaleLinear()
       .domain([1970, 2017])
-      .range([margin.left, width - margin.left]);
+      .range([margin.left, width - margin.right]);
 
   // make y_scale
   var yScale = d3.scaleLinear()
@@ -524,6 +515,16 @@ function Linechart(data, dataFatal, dataNon_fatal, svgLine, country) {
   var yAxis = d3.axisLeft()
     .scale(yScale)
     .ticks(5)
+
+  var lineWorld = [];
+
+  var yearsWorld = [];
+
+  d3.selectAll(".world")
+    .on("click", function(d) {
+      return lineCounter;
+    });
+
 
   if (lineCounter == 0) {
 
@@ -550,7 +551,7 @@ function Linechart(data, dataFatal, dataNon_fatal, svgLine, country) {
         .style("stroke-dasharray",("3,3"))
         .attr("transform", "translate(45," + 0 + ")")
         .call(gridLines()
-            .tickSize(-width + margin.right)
+            .tickSize(-width + margin.right + margin.left)
             .tickFormat(""));
 
     svgLine.append("g")
@@ -574,6 +575,70 @@ function Linechart(data, dataFatal, dataNon_fatal, svgLine, country) {
       .style("text-anchor", "middle")
       .text("Select a country in the world map");
 
+    // parsing data world fatalities
+    dataFatal.forEach(function (d) {
+      if (d['Code|2017'] == "OWID_WRL") {
+        currentCountry = d["Country"]
+        year = 1970
+        yearsWorld.push(year)
+        lineWorld.push(d["Incidents|" + year])
+        for(i = 0; i < 47; i++) {
+          year += 1
+          if (d["Incidents|" + year] != undefined || d["Incidents|" + year] != null) {
+            yearsWorld.push(year)
+            lineWorld.push(d["Incidents|" + year])
+          }
+        }
+      }
+    })
+
+    // Draw line fatalities
+    var tip = d3.tip()
+              .attr('class', 'd3-tip')
+              .offset([-10, 0])
+              .html(function(d,i) {
+                return "<strong>Country:</strong> <span style='color:white'>"
+                      + currentCountry + "</span><br><strong>Fatalities:</strong> \
+                      <span style='color:white'>"
+                      + d + "</span><br><strong>Year:</strong> \
+                      <span style='color:white'>"
+                      + yearsWorld[i] + "</span>";
+    })
+
+    svgLine.call(tip);
+
+    var lineW = d3.line()
+      .x(function(d, i) {return xScale(yearsWorld[i]) + 20; }) // set the x values for the line generator
+      .y(function(d) {return yScale(d); }) // set the y values for the line generator
+
+    // line fatal
+    svgLine.append("path")
+      .datum(lineWorld) // 10. Binds data to the line
+      .attr("id", "linechartFatal") // Assign a class for styling
+      .style("stroke", "#7e7b52")
+      .style("stroke-width", "2px")
+      .attr("d", lineW);
+
+    svgLine.selectAll(".dot")
+      .data(lineWorld)
+      .enter().append("circle") // Uses the enter().append() method
+          .attr("class", "dot") // Assign a class for styling
+          .attr("cx", function(d, i) { return xScale(yearsWorld[i]) + 20 })
+          .attr("cy", function(d) { return yScale(d) })
+          .attr("r", 3)// 11. Calls the line generator
+    .on('mouseover', function (d, i) {
+      tip.show(d,i)
+      d3.select(this)
+      .style("stroke", "white")
+      .attr("r", 6)
+    })
+    .on('mouseout', function (d) {
+      tip.hide(d)
+      d3.select(this)
+      .style("stroke", "white")
+      .attr("r", 3)
+    })
+
     lineCounter += 1
   }
 
@@ -584,28 +649,38 @@ function Linechart(data, dataFatal, dataNon_fatal, svgLine, country) {
            .remove();
 
     // Update lines with new data
-    updateLines(data, dataFatal, dataNon_fatal, svgLine, margin, width, height, xScale, yScale, country)
+    updateLines(data, dataFatal, dataNon_fatal, svgLine, margin, width, height, xScale, yScale, country, yAxis)
   }
 
 }
 
-function updateLines(data, dataFatal, dataNon_fatal, svgLine, margin, width, height, xScale, yScale, country){
-
-  svgLine.selectAll("#linechart")
-         .remove();
+function updateLines(data, dataFatal, dataNon_fatal, svgLine, margin, width, height, xScale, yScale, country, yAxis) {
 
   svgLine.selectAll(".dot")
         .remove();
 
+  svgLine.selectAll(".dotN")
+        .remove();
+
+  //
+  // svgLine.selectAll(".dotW")
+  //       .remove();
+  //
+
   lineFatal = [];
   lineNonfatal = [];
-  yearsFatal = []
-  yearsNonfatal = []
+
+
+  yearsFatal = [];
+  yearsNonfatal = [];
+
 
   year = 1970
 
+  // parsing data fatalities
   dataFatal.forEach(function (d) {
     if (d['Code|2017'] == country) {
+      currentCountry = d["Country"]
       year = 1970
       yearsFatal.push(year)
       lineFatal.push(d["Incidents|" + year])
@@ -619,8 +694,10 @@ function updateLines(data, dataFatal, dataNon_fatal, svgLine, margin, width, hei
     }
   })
 
+  // parsing data injuries
   dataNon_fatal.forEach(function (d) {
     if (d['Code|2017'] == country) {
+      currentCountryN = d["Country"]
       year = 1970
       yearsNonfatal.push(year)
       lineNonfatal.push(d["Incidents|" + year])
@@ -634,28 +711,34 @@ function updateLines(data, dataFatal, dataNon_fatal, svgLine, margin, width, hei
     }
   })
 
+  // Draw line fatalities
   var tip = d3.tip()
             .attr('class', 'd3-tip')
             .offset([-10, 0])
-            .html(function(d) {
-              return "<strong>Country: </strong><span class='details'>" + country + "<br></span>" + "<strong>Fatal: </strong><span class='details'>"  + number "</span>";
+            .html(function(d,i) {
+              return "<strong>Country:</strong> <span style='color:white'>"
+                    + currentCountry + "</span><br><strong>Fatalities:</strong> \
+                    <span style='color:white'>"
+                    + d + "</span><br><strong>Year:</strong> \
+                    <span style='color:white'>"
+                    + yearsFatal[i] + "</span>";
+  })
 
   svgLine.call(tip);
 
   var lineF = d3.line()
   .x(function(d, i) { return xScale(yearsFatal[i]) + 20; }) // set the x values for the line generator
   .y(function(d) {return yScale(d); }) // set the y values for the line generator
-  .curve(d3.curveMonotoneX) // apply smoothing to the line
 
   // line fatal
   svgLine.append("path")
     .datum(lineFatal) // 10. Binds data to the line
-    .attr("id", "linechart") // Assign a class for styling
-    .style("stroke", "red")
+    .attr("id", "linechartFatal") // Assign a class for styling
+    .style("stroke", "#dc143c")
     .style("stroke-width", "2px")
     .attr("d", lineF)
 
-  svgLine.selectAll(".dot")
+  svgLine.selectAll(".dot" + country)
     .data(lineFatal)
     .enter().append("circle") // Uses the enter().append() method
         .attr("class", "dot") // Assign a class for styling
@@ -663,43 +746,137 @@ function updateLines(data, dataFatal, dataNon_fatal, svgLine, margin, width, hei
         .attr("cy", function(d) { return yScale(d) })
         .attr("r", 3)// 11. Calls the line generator
   .on('mouseover', function (d, i) {
+    tip.show(d,i)
     d3.select(this)
-    .style("stroke", "Red")
+    .style("stroke", "white")
+    .attr("r", 6)
   })
   .on('mouseout', function (d) {
     tip.hide(d)
     d3.select(this)
     .style("stroke", "white")
+    .attr("r", 3)
   })
+
+  // draw line injuries
+  var tip = d3.tip()
+            .attr('class', 'd3-tip')
+            .offset([-10, 0])
+            .html(function(d,i) {
+              return "<strong>Country:</strong> <span style='color:white'>"
+                    + currentCountry + "</span><br><strong>Injuries:</strong> \
+                    <span style='color:white'>"
+                    + d + "</span><br><strong>Year:</strong> \
+                    <span style='color:white'>"
+                    + yearsFatal[i] + "</span>";
+  })
+
+  svgLine.call(tip);
 
   var lineN = d3.line()
   .x(function(d, i) { return xScale(yearsNonfatal[i]) + 20; }) // set the x values for the line generator
   .y(function(d) {return yScale(d); }) // set the y values for the line generator
-  .curve(d3.curveMonotoneX) // apply smoothing to the line
 
   // line non fatal
   svgLine.append("path")
     .datum(lineNonfatal) // 10. Binds data to the line
-    .attr("id", "linechart") // Assign a class for styling
-    .style("stroke", "blue")
+    .attr("id", "linechartNonfatal") // Assign a class for styling
+    .style("stroke", "#4073dc")
     .style("stroke-width", "2px")
     .attr("d", lineN)
 
-  svgLine.selectAll(".dotN")
+  svgLine.selectAll(".dot" + country)
     .data(lineNonfatal)
     .enter().append("circle") // Uses the enter().append() method
         .attr("class", "dotN") // Assign a class for styling
         .attr("cx", function(d, i) { return xScale(yearsNonfatal[i]) + 20 })
         .attr("cy", function(d) { return yScale(d) })
         .attr("r", 3)// 11. Calls the line generator
-  .on('mouseover', function (d, i) {
-    d3.select(this)
-    .style("stroke", "Red")
-  })
-  .on('mouseout', function (d) {
-    tip.hide(d)
-    d3.select(this)
-    .style("stroke", "white")
-  })
+    .on('mouseover', function (d, i) {
+      tip.show(d,i)
+      d3.select(this)
+      .style("stroke", "white")
+      .attr("r", 6)
+    })
+    .on('mouseout', function (d) {
+      tip.hide(d)
+      d3.select(this)
+      .style("stroke", "white")
+      .attr("r", 3)
+    })
+
+  var uFatal = d3.selectAll('#linechartFatal')
+    .datum(lineFatal);
+
+    uFatal.enter()
+      .select("path")
+      .merge(uFatal)
+      .style("stroke", "#dc143c")
+      .style("stroke-width", "2px")
+      .attr("d", lineF)
+
+    uFatal.exit().remove();
+
+  var uNon = d3.selectAll('#linechartNonfatal')
+    .datum(lineNonfatal);
+
+    uNon.enter()
+      .select("path")
+      .merge(uNon)
+      .style("stroke", "#4073dc")
+      .style("stroke-width", "2px")
+      .attr("d", lineN)
+
+    uNon.exit().remove();
+
+
+  // var dot = d3.selectAll(".dot" + country)
+  //   .data(lineFatal);
+  //
+  //   dot.enter()
+  //           .selectAll("circle")
+  //           .attr("class", "dot")// Assign a class for styling
+  //           .attr("cx", function(d, i) { return xScale(yearsFatal[i]) + 20 })
+  //           .attr("cy", function(d) { return yScale(d) })
+  //           .attr("r", 3)// 11. Calls the line generator
+  //     .on('mouseover', function (d, i) {
+  //       tip.show(d,i)
+  //       d3.select(this)
+  //       .style("stroke", "white")
+  //       .attr("r", 6)
+  //     })
+  //     .on('mouseout', function (d) {
+  //       tip.hide(d)
+  //       d3.select(this)
+  //       .style("stroke", "white")
+  //       .attr("r", 3)
+  //     })
+  //
+  // dot.exit().remove();
+  //
+  // var dotN = d3.selectAll('.dot' + country)
+  //   .data(lineNonfatal);
+  //
+  //   dotN.enter()
+  //         .selectAll("circle")
+  //         .attr("class", "dotN") // Assign a class for styling
+  //         .attr("cx", function(d, i) { return xScale(yearsNonfatal[i]) + 20 })
+  //         .attr("cy", function(d) { return yScale(d) })
+  //         .attr("r", 3)// 11. Calls the line generator
+  //     .on('mouseover', function (d, i) {
+  //       tip.show(d,i)
+  //       d3.select(this)
+  //       .style("stroke", "white")
+  //       .attr("r", 6)
+  //     })
+  //     .on('mouseout', function (d) {
+  //       tip.hide(d)
+  //       d3.select(this)
+  //       .style("stroke", "white")
+  //       .attr("r", 3)
+  //     })
+  //
+  //     dotN.exit().remove();
+
 
 }

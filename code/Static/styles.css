@@ -220,8 +220,14 @@ pointer-events: none;
   fill: lightgrey;
 }
 
-#linechart {
+#linechartFatal {
   stroke: red;
+  fill: none;
+  stroke-opacity: 1;
+}
+
+#linechartNonfatal{
+  stroke: blue;
   fill: none;
   stroke-opacity: 1;
 }
@@ -233,17 +239,27 @@ pointer-events: none;
 
 /* Style the dots by assigning a fill and stroke */
 .dot {
-    fill: #ffab00;
+    fill: #dc143c;
     stroke: #fff;
 }
 
 /* Style the dots by assigning a fill and stroke */
 .dotN {
-    fill: #ffab00;
+    fill: #4073dc;
+    stroke: #fff;
+}
+
+/* Style the dots by assigning a fill and stroke */
+.dotW {
+    fill: #7e7b52;
     stroke: #fff;
 }
 
 .focus circle {
 fill: none;
 stroke: steelblue;
+}
+
+.world:active {
+  background-color: lightgrey;
 }
