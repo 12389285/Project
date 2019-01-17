@@ -74,5 +74,8 @@
 * Added button for world data
 * Added buttons for Asia, Europe, middle east & North Africa
 * Made update function for lines instead of remove function
+* Decided to add an country dropdown
+* Working update for country dropdownLines
+* Working update for y axis in linechart
 
-<img width="1343" alt="schermafbeelding 2019-01-17 om 15 28 13" src="https://user-images.githubusercontent.com/43987983/51325209-af383f80-1a6c-11e9-8532-c8cab4cea7be.png">
+<img width="1344" alt="schermafbeelding 2019-01-18 om 00 02 26" src="https://user-images.githubusercontent.com/43987983/51354594-6a37fb80-1ab4-11e9-91bd-0cbf17f96a5a.png">

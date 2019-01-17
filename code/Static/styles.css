@@ -39,10 +39,11 @@ div.col-7#map
     padding-left: 0px;
     padding-bottom: 5px;
 }
-div.col-7#linechartleft
+div.col-9#linechartleft
 {
     padding-top: 0px;
     padding-left: 0px;
+    padding-right: 20px
 }
 
 .legendLinear {
@@ -130,6 +131,10 @@ footer
     background-color: lightgrey;
     padding: 15px;
 
+}
+
+.form-control {
+  width: 10px;
 }
 
 .names {
