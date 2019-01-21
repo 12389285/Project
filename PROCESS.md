@@ -63,8 +63,9 @@
 * Fixed the x axis for barchart
 * Added text
 * Tried to update the y axis for the barchart, not working as well as I expected. After a view attempts I decided to skip this part for the barchart, maybe it might work in the linechart.
+* Made the width of linechart bigger because of empty space
 
-# Day 8
+## Day 8
 
 17/01/2019
 
@@ -79,3 +80,19 @@
 * Working update for y axis in linechart
 
 <img width="1344" alt="schermafbeelding 2019-01-18 om 00 02 26" src="https://user-images.githubusercontent.com/43987983/51354594-6a37fb80-1ab4-11e9-91bd-0cbf17f96a5a.png">
+
+## Day 9
+
+18/01/2019
+
+* Fixed bugs in grid and grid updating
+* Tip showing "No data available" incase of no data
+* Deleted grid lines barchart, because looks better without
+* Added "No data available" in barcharts
+
+## Day 10
+
+21/01/2019
+
+* Tried to applied a tool tip for line chart, world data works but update doesn't work.
+* Add legend to linechart
