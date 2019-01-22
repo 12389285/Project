@@ -94,5 +94,23 @@
 
 21/01/2019
 
-* Tried to applied a tool tip for line chart, world data works but update doesn't work.
+* Tried to apply tool tip for line chart, world data works but update doesn't work.
 * Add legend to linechart
+
+## Day 11
+
+22/01/2019
+
+* Fixt legend for linechart
+* Added tool tip with update function to linechart
+* Fixt bug in legend map
+* Changed colors in map to gradient from yellow --> blue --> darkblue, to see more difference between countries
+* Changed the scale for colors to see smaller amounts in the map
+* Changed legend to gradient pattern
+* Trying to add mouse on in legend to highlight the countries in the map.
+* Changed the height of y axis in line chart to add the title
+* Add title, not yet in update function
+
+<img width="828" alt="schermafbeelding 2019-01-22 om 16 10 51" src="https://user-images.githubusercontent.com/43987983/51544509-66172f80-1e60-11e9-8fb0-61d2ca2f6601.png">
+
+<img width="1354" alt="schermafbeelding 2019-01-22 om 16 11 02" src="https://user-images.githubusercontent.com/43987983/51544528-73341e80-1e60-11e9-9836-c8a741ba8d63.png">

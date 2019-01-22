@@ -268,3 +268,8 @@ stroke: steelblue;
 .world:active {
   background-color: lightgrey;
 }
+
+
+.legendLines, .lineTitle, .yLabel {
+    font-family: Times;
+}
