@@ -19,6 +19,10 @@ svg {
     box-shadow: 0 1px 5px #ddd;
 }
 
+.goto {
+  font-family: Times;
+}
+
 /* fill viewport */
 div.container-fluid, div.row, div.jumbotron
 {
@@ -121,6 +125,12 @@ h3
   font-size: 20px !important;
   text-align: left !important;
 }
+h4
+{
+  font-family: Times !important;
+  font-size: 19px !important;
+  text-align: left !important;
+}
 li {
   font-family: Times;
 }
@@ -221,6 +231,7 @@ pointer-events: none;
 .bar {
     fill: grey;
 }
+
 .bar:hover {
   fill: lightgrey;
 }

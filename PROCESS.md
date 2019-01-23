@@ -114,3 +114,13 @@
 <img width="828" alt="schermafbeelding 2019-01-22 om 16 10 51" src="https://user-images.githubusercontent.com/43987983/51544509-66172f80-1e60-11e9-8fb0-61d2ca2f6601.png">
 
 <img width="1354" alt="schermafbeelding 2019-01-22 om 16 11 02" src="https://user-images.githubusercontent.com/43987983/51544528-73341e80-1e60-11e9-9836-c8a741ba8d63.png">
+
+## Day 12
+
+23/01/2019
+
+* Fixed an interactive legend to see how many countries of the same color/amount of attacks
+* Attempt to see if it is better to color the barcharts with the same color of the color on the map, no succes.
+* Organized my code, one file with 1300 code lines to 7 files with maximum of 200 lines
+* changed the no data color en null color
+* Changed the data color gradient 
