@@ -1,6 +1,5 @@
 function tipLine(svgLine, lineFatal, lineNonfatal, xScale, yScale, yearsFatal, yearsNonfatal) {
 
-
   // tip for fatalities
   var tip = d3.tip()
             .attr('class', 'd3-tip')
@@ -10,7 +9,7 @@ function tipLine(svgLine, lineFatal, lineNonfatal, xScale, yScale, yearsFatal, y
                     + d + "</span><br><strong>Year:</strong> \
                     <span style='color:white'>"
                     + yearsFatal[i] + "</span>";
-  })
+              });
 
   svgLine.call(tip);
 
@@ -21,7 +20,7 @@ function tipLine(svgLine, lineFatal, lineNonfatal, xScale, yScale, yearsFatal, y
         .attr("class", "dot")
         .attr("cx", function(d, i) { return xScale(yearsFatal[i]) + 20 })
         .attr("cy", function(d) { return yScale(d) })
-        .attr("r", 3)
+        .attr("r", 3);
 
   // update tip for line fatal
   d3.select(".linechart").selectAll(".dot")
@@ -37,7 +36,7 @@ function tipLine(svgLine, lineFatal, lineNonfatal, xScale, yScale, yearsFatal, y
       d3.select(this)
       .style("stroke", "white")
       .attr("r", 3)
-    })
+    });
 
   // tip for injuries
   var tipN = d3.tip()
@@ -48,7 +47,7 @@ function tipLine(svgLine, lineFatal, lineNonfatal, xScale, yScale, yearsFatal, y
                     + d + "</span><br><strong>Year:</strong> \
                     <span style='color:white'>"
                     + yearsFatal[i] + "</span>";
-  })
+              });
 
   svgLine.call(tipN);
 
@@ -59,7 +58,7 @@ function tipLine(svgLine, lineFatal, lineNonfatal, xScale, yScale, yearsFatal, y
         .attr("class", "dotN")
         .attr("cx", function(d, i) { return xScale(yearsNonfatal[i]) + 20 })
         .attr("cy", function(d) { return yScale(d) })
-        .attr("r", 3)
+        .attr("r", 3);
 
   // Update tip for line non fatal
   d3.select(".linechart").selectAll(".dotN")
@@ -75,6 +74,5 @@ function tipLine(svgLine, lineFatal, lineNonfatal, xScale, yScale, yearsFatal, y
       d3.select(this)
       .style("stroke", "white")
       .attr("r", 3)
-    })
-
+    });
 }

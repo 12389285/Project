@@ -1,47 +1,15 @@
 function dropdownLines(data, dataFatal, dataNon_fatal, svgLine, margin, width, height, xScale, yScale, country, yAxis, code) {
 
+  var lineFatal = [];
+  var lineNonfatal = [];
+  var yearsFatal = [];
+  var yearsNonfatal = [];
 
-  lineFatal = [];
-  lineNonfatal = [];
-  yearsFatal = [];
-  yearsNonfatal = [];
+  var year = 1970;
 
-  year = 1970
+  parseCode(dataFatal, dataNon_fatal, lineFatal, lineNonfatal, yearsFatal, yearsNonfatal, year, code);
 
-  // parsing data fatalities
-  dataFatal.forEach(function (d) {
-    if (d['Code|2017'] == code) {
-      currentCountry = d["Country"]
-      year = 1970
-      yearsFatal.push(year)
-      lineFatal.push(d["Incidents|" + year])
-      for(i = 0; i < 47; i++) {
-        year += 1
-        if (d["Incidents|" + year] != undefined || d["Incidents|" + year] != null) {
-          yearsFatal.push(year)
-          lineFatal.push(d["Incidents|" + year])
-        }
-      }
-    }
-  })
-
-  // parsing data injuries
-  dataNon_fatal.forEach(function (d) {
-    if (d['Code|2017'] == code) {
-      currentCountryN = d["Country"]
-      year = 1970
-      yearsNonfatal.push(year)
-      lineNonfatal.push(d["Incidents|" + year])
-      for(i = 0; i < 47; i++) {
-        year += 1
-        if (d["Incidents|" + year] != undefined || d["Incidents|" + year] != null) {
-          yearsNonfatal.push(year)
-          lineNonfatal.push(d["Incidents|" + year])
-        }
-      }
-    }
-  })
-
+  // When data in lists
   if (lineFatal.length > 0) {
 
     svgLine.select(".select")
@@ -96,6 +64,15 @@ function dropdownLines(data, dataFatal, dataNon_fatal, svgLine, margin, width, h
 
 function Buttons(data, dataFatal, dataNon_fatal, svgLine, margin, width, height, xScale, yScale, country, yAxis, button) {
 
+  // making list for data
+  var lineFatal = [];
+  var lineNonfatal = [];
+
+  var yearsFatal = [];
+  var yearsNonfatal = [];
+
+  var year = 1970;
+
   // if no data available is active first remove
   svgLine.select(".select")
          .remove();
@@ -113,46 +90,7 @@ function Buttons(data, dataFatal, dataNon_fatal, svgLine, margin, width, height,
        .attr("y", 30)
        .text(button);
 
-  // making list for data
-  var lineFatal = [];
-  var lineNonfatal = [];
-
-  var yearsFatal = [];
-  var yearsNonfatal = [];
-
-  // parsing data fatalities
-  dataFatal.forEach(function (d) {
-    if (d['Country'] == button) {
-      currentCountry = d["Country"]
-      year = 1970
-      yearsFatal.push(year)
-      lineFatal.push(d["Incidents|" + year])
-      for(i = 0; i < 47; i++) {
-        year += 1
-        if (d["Incidents|" + year] != undefined || d["Incidents|" + year] != null) {
-          yearsFatal.push(year)
-          lineFatal.push(d["Incidents|" + year])
-        }
-      }
-    }
-  })
-
-  // parsing data injuries
-  dataNon_fatal.forEach(function (d) {
-    if (d['Country'] == button) {
-      currentCountryN = d["Country"]
-      year = 1970
-      yearsNonfatal.push(year)
-      lineNonfatal.push(d["Incidents|" + year])
-      for(i = 0; i < 47; i++) {
-        year += 1
-        if (d["Incidents|" + year] != undefined || d["Incidents|" + year] != null) {
-          yearsNonfatal.push(year)
-          lineNonfatal.push(d["Incidents|" + year])
-        }
-      }
-    }
-  })
+  parseCountry(dataFatal, dataNon_fatal, lineFatal, lineNonfatal, yearsFatal, yearsNonfatal, year);
 
   updateFunction(lineFatal, lineNonfatal, yearsFatal, yearsNonfatal, xScale, yScale, yAxis, country, svgLine);
 }

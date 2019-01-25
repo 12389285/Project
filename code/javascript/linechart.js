@@ -1,25 +1,25 @@
 function Linechart(data, dataFatal, dataNon_fatal, svgLine, country) {
 
-  var lineWorld = [];
-  var yearsWorld = [];
-
-  var lineWorldN = [];
-  var yearsWorldN = [];
+  var lineFatal = [];
+  var yearsFatal = [];
+  var lineNonfatal = [];
+  var yearsNonfatal = [];
 
   var topPadding = 30;
 
-  margin = {top: 20, right: 50, bottom: 20, left: 25},
-  width = 1310 - margin.left - margin.right,
-  height = 500 - margin.top - margin.bottom,
+  let margin = {top: 20, right: 50, bottom: 20, left: 25},
+      width = 1310 - margin.left - margin.right,
+      height = 500 - margin.top - margin.bottom,
 
-  g = svgLine.append("g")
+      g = svgLine.append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+  // set x scale
   var xScale = d3.scaleLinear()
-      .domain([1970, 2017])
-      .range([margin.left, width - margin.right]);
+    .domain([1970, 2017])
+    .range([margin.left, width - margin.right]);
 
-  // make y_scale
+  // set y scale
   var yScale = d3.scaleLinear()
     .domain([0, 50000])
     .range([height, margin.top + topPadding]);
@@ -34,7 +34,7 @@ function Linechart(data, dataFatal, dataNon_fatal, svgLine, country) {
   d3.selectAll(".world")
     .on("click", function(d) {
 
-      button = "World"
+      button = "World";
 
       return Buttons(data, dataFatal, dataNon_fatal, svgLine, margin, width, height, xScale, yScale, country, yAxis, button);
     });
@@ -42,7 +42,7 @@ function Linechart(data, dataFatal, dataNon_fatal, svgLine, country) {
   d3.selectAll(".asia")
     .on("click", function(d) {
 
-      button = "South Asia"
+      button = "South Asia";
 
       return Buttons(data, dataFatal, dataNon_fatal, svgLine, margin, width, height, xScale, yScale, country, yAxis, button);
     });
@@ -50,7 +50,7 @@ function Linechart(data, dataFatal, dataNon_fatal, svgLine, country) {
   d3.selectAll(".europe")
     .on("click", function(d) {
 
-      button = "Eastern Europe"
+      button = "Eastern Europe";
 
       return Buttons(data, dataFatal, dataNon_fatal, svgLine, margin, width, height, xScale, yScale, country, yAxis, button);
     });
@@ -58,7 +58,7 @@ function Linechart(data, dataFatal, dataNon_fatal, svgLine, country) {
   d3.selectAll(".middle")
     .on("click", function(d) {
 
-      button = "Middle East & North Africa"
+      button = "Middle East & North Africa";
 
       return Buttons(data, dataFatal, dataNon_fatal, svgLine, margin, width, height, xScale, yScale, country, yAxis, button);
     });
@@ -73,40 +73,45 @@ function Linechart(data, dataFatal, dataNon_fatal, svgLine, country) {
 
   }
 
+  // start settings
   if (lineCounter == 0) {
+
+    var code = "OWID_WRL"
+
+    var year = 1970;
 
     // add legend
     svgLine.append("g")
       .attr("class", "legendLines")
-      .attr("transform", "translate(1220," + margin.top + ")")
+      .attr("transform", "translate(1220," + margin.top + ")");
 
-    svgLine.selectAll(".legendLines")
-        .append("rect")
-          .attr("y", 10 + topPadding)
-          .attr("width", 12)
-          .attr("height", 4)
-          .style("fill", "#dc143c");
+      svgLine.selectAll(".legendLines")
+          .append("rect")
+            .attr("y", 10 + topPadding)
+            .attr("width", 12)
+            .attr("height", 4)
+            .style("fill", "#dc143c");
 
-    svgLine.selectAll(".legendLines")
-        .append("text")
-          .attr("font-size","12px")
-          .attr("y", 13 + topPadding)
-          .attr("x", 17)
-          .text("Fatalities");
+      svgLine.selectAll(".legendLines")
+          .append("text")
+            .attr("font-size","12px")
+            .attr("y", 13 + topPadding)
+            .attr("x", 17)
+            .text("Fatalities");
 
-    svgLine.selectAll(".legendLines")
-        .append("rect")
-          .attr("y", 21 + topPadding)
-          .attr("width", 12)
-          .attr("height", 4)
-          .style("fill", "#4073dc");
+      svgLine.selectAll(".legendLines")
+          .append("rect")
+            .attr("y", 21 + topPadding)
+            .attr("width", 12)
+            .attr("height", 4)
+            .style("fill", "#4073dc");
 
-    svgLine.selectAll(".legendLines")
-        .append("text")
-          .attr("font-size","12px")
-          .attr("y", 24 + topPadding)
-          .attr("x", 17)
-          .text("Injuries");
+      svgLine.selectAll(".legendLines")
+          .append("text")
+            .attr("font-size","12px")
+            .attr("y", 24 + topPadding)
+            .attr("x", 17)
+            .text("Injuries");
 
     // append group and insert axis
     var gX = svgLine.append("g")
@@ -156,51 +161,21 @@ function Linechart(data, dataFatal, dataNon_fatal, svgLine, country) {
         .attr("y", 30)
       	.text("World");
 
-    // parsing data world fatalities
-    dataFatal.forEach(function (d) {
-      if (d['Code|2017'] == "OWID_WRL") {
-        currentCountry = d["Country"]
-        year = 1970
-        yearsWorld.push(year)
-        lineWorld.push(d["Incidents|" + year])
-        for(i = 0; i < 47; i++) {
-          year += 1
-          if (d["Incidents|" + year] != undefined || d["Incidents|" + year] != null) {
-            yearsWorld.push(year)
-            lineWorld.push(d["Incidents|" + year])
-          }
-        }
-      }
-    })
+    parseCode(dataFatal, dataNon_fatal, lineFatal, lineNonfatal, yearsFatal, yearsNonfatal, year, code);
 
-    // parsing data non fatal world
-    dataNon_fatal.forEach(function (d) {
-      if (d['Code|2017'] == "OWID_WRL") {
-        currentCountryN = d["Country"]
-        year = 1970
-        yearsWorldN.push(year)
-        lineWorldN.push(d["Incidents|" + year])
-        for(i = 0; i < 47; i++) {
-          year += 1
-          if (d["Incidents|" + year] != undefined || d["Incidents|" + year] != null) {
-            yearsWorldN.push(year)
-            lineWorldN.push(d["Incidents|" + year])
-          }
-        }
-      }
-    })
-
+    // set the x and y values for the fatal line generator
     var lineW = d3.line()
-      .x(function(d, i) {return xScale(yearsWorld[i]) + 20; }) // set the x values for the line generator
-      .y(function(d) {return yScale(d); }) // set the y values for the line generator
+      .x(function(d, i) {return xScale(yearsFatal[i]) + 20; })
+      .y(function(d) {return yScale(d); });
 
+    // set the x and y values for the non fatal line generator
     var lineWN = d3.line()
-      .x(function(d, i) { return xScale(yearsWorldN[i]) + 20; }) // set the x values for the line generator
-      .y(function(d) {return yScale(d); }) // set the y values for the line generator
+      .x(function(d, i) { return xScale(yearsNonfatal[i]) + 20; })
+      .y(function(d) {return yScale(d); });
 
     // line fatal
     svgLine.append("path")
-      .datum(lineWorld) // 10. Binds data to the line
+      .datum(lineFatal)
       .attr("id", "linechartFatal")
       .style("stroke", "#dc143c")
       .style("stroke-width", "2px")
@@ -214,12 +189,12 @@ function Linechart(data, dataFatal, dataNon_fatal, svgLine, country) {
             d3.select(this)
             .style("stroke", "#dc143c")
             .style("stroke-width", 2)
-        })
+        });
 
     // line non fatal world
     svgLine.append("path")
-      .datum(lineWorldN) // 10. Binds data to the line
-      .attr("id", "linechartNonfatal") // Assign a class for styling
+      .datum(lineNonfatal)
+      .attr("id", "linechartNonfatal")
       .style("stroke", "#4073dc")
       .style("stroke-width", "2px")
       .attr("d", lineWN)
@@ -234,12 +209,11 @@ function Linechart(data, dataFatal, dataNon_fatal, svgLine, country) {
             .style("stroke-width", 2)
         });
 
-    tipLine(svgLine, lineWorld, lineWorldN, xScale, yScale, yearsWorld, yearsWorldN);
+    // adding tip to line
+    tipLine(svgLine, lineFatal, lineNonfatal, xScale, yScale, yearsFatal, yearsNonfatal);
 
     lineCounter += 1;
   }
-
-
   else if (lineCounter > 0) {
 
     // remove instructions
@@ -247,54 +221,23 @@ function Linechart(data, dataFatal, dataNon_fatal, svgLine, country) {
            .remove();
 
     // Update lines with new data
-    updateLines(data, dataFatal, dataNon_fatal, svgLine, margin, width, height, xScale, yScale, country, yAxis)
+    updateLines(data, dataFatal, dataNon_fatal, svgLine, margin, width, height, xScale, yScale, country, yAxis);
   }
 
 }
 
 function updateLines(data, dataFatal, dataNon_fatal, svgLine, margin, width, height, xScale, yScale, country, yAxis) {
 
-  lineFatal = [];
-  lineNonfatal = [];
-  yearsFatal = [];
-  yearsNonfatal = [];
+  var lineFatal = [];
+  var yearsFatal = [];
+  var lineNonfatal = [];
+  var yearsNonfatal = [];
 
-  year = 1970
+  var year = 1970;
 
-  // parsing data fatalities
-  dataFatal.forEach(function (d) {
-    if (d['Code|2017'] == country) {
-      currentCountry = d["Country"]
-      year = 1970
-      yearsFatal.push(year)
-      lineFatal.push(d["Incidents|" + year])
-      for(i = 0; i < 47; i++) {
-        year += 1
-        if (d["Incidents|" + year] != undefined || d["Incidents|" + year] != null) {
-          yearsFatal.push(year)
-          lineFatal.push(d["Incidents|" + year])
-        }
-      }
-    }
-  })
+  parseCode(dataFatal, dataNon_fatal, lineFatal, lineNonfatal, yearsFatal, yearsNonfatal, year, country);
 
-  // parsing data injuries
-  dataNon_fatal.forEach(function (d) {
-    if (d['Code|2017'] == country) {
-      currentCountryN = d["Country"]
-      year = 1970
-      yearsNonfatal.push(year)
-      lineNonfatal.push(d["Incidents|" + year])
-      for(i = 0; i < 47; i++) {
-        year += 1
-        if (d["Incidents|" + year] != undefined || d["Incidents|" + year] != null) {
-          yearsNonfatal.push(year)
-          lineNonfatal.push(d["Incidents|" + year])
-        }
-      }
-    }
-  })
-
+  // only update line when list is filled
   if (lineFatal.length > 0) {
 
     svgLine.select(".select")
@@ -303,6 +246,7 @@ function updateLines(data, dataFatal, dataNon_fatal, svgLine, margin, width, hei
     svgLine.select(".lineTitle")
            .remove();
 
+    // update title
     svgLine.append("g")
          .append("text")
            .attr("class", "lineTitle")
@@ -333,7 +277,7 @@ function updateLines(data, dataFatal, dataNon_fatal, svgLine, margin, width, hei
             .attr("y", 30)
               .text(currentCountry);
 
-    // create select
+    // create no data
     svgLine.append("text")
       .attr("class", "select")
       .attr("font-size","20px")

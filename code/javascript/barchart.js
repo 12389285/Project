@@ -1,37 +1,45 @@
+var barWidth = 20
+
 function Barchart(data, dataIncidents, svgBar, country, number, year) {
 
-  margin = {top: 20, right: 20, bottom: 50, left: 20},
-  width = 500 - margin.left - margin.right,
-  height = 500 - margin.top - margin.bottom,
+  let margin = {top: 20, right: 20, bottom: 50, left: 20},
+      width = 500 - margin.left - margin.right,
+      height = 500 - margin.top - margin.bottom,
 
-  g = svgBar.append("g")
-            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+      g = svgBar.append("g")
+              .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+  // set x scale
   var xScale = d3.scaleLinear()
       .domain([0,10])
       .range([margin.left, width]);
 
-  // make y_scale
+  // set y scale
   var yScale = d3.scaleLinear()
-    .domain([0, 4000])
-    .range([height, margin.top]);
+      .domain([0, 4000])
+      .range([height, margin.top]);
 
   var xAxis = d3.axisBottom()
-    .scale(xScale)
-    .ticks(0)
+      .scale(xScale)
+      .ticks(0)
 
   var yAxis = d3.axisLeft()
-    .scale(yScale);
+      .scale(yScale);
 
-  // resetten
+  // reset function
   function Reset() {
 
       positionX = 75;
 
       barCounter = 0;
 
+      // remove all bars
       bars = svgBar.selectAll("rect")
-                      .remove();
+                    .transition()
+                    .duration(duration)
+                    .attr("height", 0)
+                    .attr("y", height)
+                    .remove();
 
       xtext = svgBar.selectAll(".xText")
                     .remove();
@@ -73,9 +81,9 @@ function Barchart(data, dataIncidents, svgBar, country, number, year) {
               + country + "</span><br><strong>Attacks:</strong> \
               <span style='color:white'>"
               + number + "</span>";
-      })
+      });
 
-  svgBar.call(tip)
+  svgBar.call(tip);
 
   // only insert axis ones
   if (barCounter == 0) {
@@ -86,7 +94,7 @@ function Barchart(data, dataIncidents, svgBar, country, number, year) {
       .attr("transform", "translate(20," + height + ")")
       .call(xAxis)
 
-      // append group and insert axis
+    // append group and insert axis
     var gY = svgBar.append("g")
       .attr("class", "y.axis")
       .attr("transform", "translate(40," + 0 + ")")
@@ -120,7 +128,7 @@ function Barchart(data, dataIncidents, svgBar, country, number, year) {
               bars = (barCounter * 30) + 30;
               return bars;
           })
-          .attr("width", 20)
+          .attr("width", barWidth)
           .attr("y", function (d) {
               return yScale(number);
           })
@@ -141,6 +149,7 @@ function Barchart(data, dataIncidents, svgBar, country, number, year) {
             .attr("transform", "rotate(-45)")
             .text(country + "|" + year);
       }
+
       else {
 
         svgBar.append("g")
@@ -206,9 +215,9 @@ function updateBar(data, dataIncidents, svgBar, xScale, yScale, margin, width, h
               + country + "</span><br><strong>Attacks:</strong> \
               <span style='color:white'>"
               + number + "</span>";
-      })
+      });
 
-  svgBar.call(tip)
+  svgBar.call(tip);
 
   if (number > 0) {
 
@@ -219,7 +228,7 @@ function updateBar(data, dataIncidents, svgBar, xScale, yScale, margin, width, h
             bars = (barCounter * 40) + 20;
             return bars;
         })
-        .attr("width", 20)
+        .attr("width", barWidth)
         .attr("y", function (d) {
             return yScale(number);
         })
@@ -238,7 +247,7 @@ function updateBar(data, dataIncidents, svgBar, xScale, yScale, margin, width, h
         .attr("fill", "black")
         .style("text-anchor", "end")
         .attr("transform", "rotate(-45)")
-        .text(country + "|" + year)
+        .text(country + "|" + year);
   }
 
   else {

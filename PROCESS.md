@@ -123,4 +123,22 @@
 * Attempt to see if it is better to color the barcharts with the same color of the color on the map, no succes.
 * Organized my code, one file with 1300 code lines to 7 files with maximum of 200 lines
 * changed the no data color en null color
-* Changed the data color gradient 
+* Changed the data color gradient
+
+# Day 13
+
+24/01/2019
+
+Hackathon
+
+# Day 14
+
+25/01/2019
+
+* Changed the removing bars with transition
+* Made an extra function for parsing the data for the lines to avoid a lot of double lines.
+* Cleaned my code with style guide
+
+<img width="1362" alt="schermafbeelding 2019-01-25 om 15 21 33" src="https://user-images.githubusercontent.com/43987983/51751431-2301ca00-20b5-11e9-97ed-cc292482b8ce.png">
+
+<img width="1362" alt="schermafbeelding 2019-01-25 om 15 24 41" src="https://user-images.githubusercontent.com/43987983/51751534-5d6b6700-20b5-11e9-8a47-72af75c38ca9.png">
