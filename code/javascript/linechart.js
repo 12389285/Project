@@ -1,5 +1,6 @@
 function Linechart(data, dataFatal, dataNon_fatal, svgLine, country) {
 
+  // empty lists first
   var lineFatal = [];
   var yearsFatal = [];
   var lineNonfatal = [];
@@ -161,6 +162,7 @@ function Linechart(data, dataFatal, dataNon_fatal, svgLine, country) {
         .attr("y", 30)
       	.text("World");
 
+    // parse data to lists
     parseCode(dataFatal, dataNon_fatal, lineFatal, lineNonfatal, yearsFatal, yearsNonfatal, year, code);
 
     // set the x and y values for the fatal line generator
@@ -228,6 +230,7 @@ function Linechart(data, dataFatal, dataNon_fatal, svgLine, country) {
 
 function updateLines(data, dataFatal, dataNon_fatal, svgLine, margin, width, height, xScale, yScale, country, yAxis) {
 
+  // empty lists first
   var lineFatal = [];
   var yearsFatal = [];
   var lineNonfatal = [];
@@ -235,6 +238,7 @@ function updateLines(data, dataFatal, dataNon_fatal, svgLine, margin, width, hei
 
   var year = 1970;
 
+  // parse data to lists
   parseCode(dataFatal, dataNon_fatal, lineFatal, lineNonfatal, yearsFatal, yearsNonfatal, year, country);
 
   // only update line when list is filled
@@ -257,6 +261,7 @@ function updateLines(data, dataFatal, dataNon_fatal, svgLine, margin, width, hei
            .attr("y", 30)
              .text(currentCountry);
 
+    // update lines
     updateFunction(lineFatal, lineNonfatal, yearsFatal, yearsNonfatal, xScale, yScale, yAxis, country, svgLine);
   }
   else {
@@ -287,6 +292,7 @@ function updateLines(data, dataFatal, dataNon_fatal, svgLine, margin, width, hei
       .style("text-anchor", "middle")
       .text("No data available");
 
+    // update lines
     updateFunction(lineFatal, lineNonfatal, yearsFatal, yearsNonfatal, xScale, yScale, yAxis, country, svgLine);
   }
 }

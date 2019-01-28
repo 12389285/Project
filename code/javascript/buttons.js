@@ -1,5 +1,6 @@
 function dropdownLines(data, dataFatal, dataNon_fatal, svgLine, margin, width, height, xScale, yScale, country, yAxis, code) {
 
+  // empty lists first
   var lineFatal = [];
   var lineNonfatal = [];
   var yearsFatal = [];
@@ -7,6 +8,7 @@ function dropdownLines(data, dataFatal, dataNon_fatal, svgLine, margin, width, h
 
   var year = 1970;
 
+  // parse data to lists
   parseCode(dataFatal, dataNon_fatal, lineFatal, lineNonfatal, yearsFatal, yearsNonfatal, year, code);
 
   // When data in lists
@@ -28,6 +30,7 @@ function dropdownLines(data, dataFatal, dataNon_fatal, svgLine, margin, width, h
           .attr("y", 30)
           .text(currentCountry);
 
+    // update lines
     updateFunction(lineFatal, lineNonfatal, yearsFatal, yearsNonfatal, xScale, yScale, yAxis, country, svgLine);
   }
   else {
@@ -58,16 +61,16 @@ function dropdownLines(data, dataFatal, dataNon_fatal, svgLine, margin, width, h
           .attr("y", 30)
             .text(currentCountry);
 
+    // update lines
     updateFunction(lineFatal, lineNonfatal, yearsFatal, yearsNonfatal, xScale, yScale, yAxis);
   }
 }
 
 function Buttons(data, dataFatal, dataNon_fatal, svgLine, margin, width, height, xScale, yScale, country, yAxis, button) {
 
-  // making list for data
+  // empty lists first
   var lineFatal = [];
   var lineNonfatal = [];
-
   var yearsFatal = [];
   var yearsNonfatal = [];
 
@@ -90,7 +93,9 @@ function Buttons(data, dataFatal, dataNon_fatal, svgLine, margin, width, height,
        .attr("y", 30)
        .text(button);
 
+  // parse data to lists
   parseCountry(dataFatal, dataNon_fatal, lineFatal, lineNonfatal, yearsFatal, yearsNonfatal, year);
 
+  // update lines
   updateFunction(lineFatal, lineNonfatal, yearsFatal, yearsNonfatal, xScale, yScale, yAxis, country, svgLine);
 }

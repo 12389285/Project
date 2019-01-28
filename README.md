@@ -1,44 +1,38 @@
-# Proposal project january 2019
+# Terrorism in the world
 
-## Terrorism incidents in the world
+## Purpose
 
-## Problem set  
-Over the years there are more terrorist attacks then there are used to be. I want to do a research on the amount of incidents, fatal and non fatal of terrorism.
+In the background page The user can find some background information and some instructions for the visualization.
 
-_Which country has the most terrorism incidents in the world?_
+With this visualization it is possible to see the amounts of terroristic attacks over the world in a period from 1970 up till 2017. In the world map it makes it easy to see the amount of attacks cause the use of changing colors which are connected to a certain amount. Use the slider to see the sequence of years. By clicking on a specific country the bar chart on the right will appear so the user can compare multiple countries.
 
-## Solution
+Below the map the user can use the line chart to see the amount of deaths and injuries during this time period per country. If the user can't find the specific country please use the map, it will also show the amount of deaths and injuries.
 
-I want to create a website where it is possible to see all kind of graphics with the use of line charts, bar charts and a world map of the amount of terrorism incidents in the world between 1970 and 2017.
+In the data page the user can find/download the data which is used for building the website.
 
-In this problem set I want to visualize:
-1) A world map with the number of incidents per year (MVP).
-2) A line chart with the the total of incidents over all the years (MVP).
-3) A multiple line chart with the fatal and none fatal incidents. (MVP)
-4) A bar chart showing the fatal and non fatal per year. (optional)
-5) A bar chart with all years per country.
-6) A multiple line chart with World/Asia/USA/Europa
+## Screenshots
 
-## Prerequisites
+<img width="1440" alt="schermafbeelding 2019-01-28 om 11 14 21" src="https://user-images.githubusercontent.com/43987983/51829549-14522780-22ee-11e9-91ab-48da1faf52e6.png">
 
-* The data I am using I found on the internet are 3 CSV files, converted to JSON.
-  1) Terrorism incidents
-  2) Fatal incidents
-  3) Non fatal incidents
+<img width="1440" alt="schermafbeelding 2019-01-28 om 11 14 38" src="https://user-images.githubusercontent.com/43987983/51829550-14522780-22ee-11e9-906c-8d68579795f2.png">
 
-* The libraries I think of using:
-  * d3
-  * matplotlib
-  * SQlite
+<img width="1440" alt="schermafbeelding 2019-01-28 om 11 15 05" src="https://user-images.githubusercontent.com/43987983/51829551-14eabe00-22ee-11e9-8b42-708f56190b77.png">
 
-* The hardest parts of implementing are:
-  * The world map
-  * Updating the map and other charts
+<img width="1440" alt="schermafbeelding 2019-01-28 om 11 15 15" src="https://user-images.githubusercontent.com/43987983/51829553-14eabe00-22ee-11e9-8cbc-3d1576ffca2f.png">
 
-## Source
+<img width="1440" alt="schermafbeelding 2019-01-28 om 11 15 25" src="https://user-images.githubusercontent.com/43987983/51829554-14eabe00-22ee-11e9-8b8b-e0740cdefe1a.png">
 
-data source: https://ourworldindata.org/terrorism
 
 ## Author
-Max Simons
-12389285
+
+Max Simons - 12389285
+
+## Acknowledgements
+
+* Github
+* Stackoverflow
+* d3 bl.ocks.org
+
+## Copyright
+
+Open source
