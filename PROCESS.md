@@ -142,3 +142,10 @@ Hackathon
 <img width="1362" alt="schermafbeelding 2019-01-25 om 15 21 33" src="https://user-images.githubusercontent.com/43987983/51751431-2301ca00-20b5-11e9-97ed-cc292482b8ce.png">
 
 <img width="1362" alt="schermafbeelding 2019-01-25 om 15 24 41" src="https://user-images.githubusercontent.com/43987983/51751534-5d6b6700-20b5-11e9-8a47-72af75c38ca9.png">
+
+# Day 15
+
+28/01/2019
+
+* Added README, LICENSE, REPORT Files
+* Moved dropdown en buttons function to line chart file

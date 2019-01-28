@@ -1,4 +1,4 @@
-var barWidth = 20
+var barWidth = 20;
 
 function Barchart(data, dataIncidents, svgBar, country, number, year) {
 
