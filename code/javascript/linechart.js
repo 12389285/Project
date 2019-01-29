@@ -1,5 +1,21 @@
 function Linechart(data, dataFatal, dataNon_fatal, svgLine, country) {
 
+  /*
+  This function takes as input the dataframes, lists and svg and outputs the
+  line chart for the world data.
+
+  This function activates:
+  - Buttons
+  - dropdownLines
+  - tipLine
+  - updateFunction
+  - parseCode
+  - parseCountry
+
+  The functions returns:
+  - country and data to buttons and dropdownLines
+  */
+
   // empty lists first
   var lineFatal = [];
   var yearsFatal = [];
@@ -230,6 +246,16 @@ function Linechart(data, dataFatal, dataNon_fatal, svgLine, country) {
 
 function updateLines(data, dataFatal, dataNon_fatal, svgLine, margin, width, height, xScale, yScale, country, yAxis) {
 
+  /*
+  This function activates when lineCounter == 1, it takes as input lists and
+  outputs the updated lines.
+
+  This functions activates:
+  - parseCode
+  - parseCountry
+  - updateFunction
+  */
+
   // empty lists first
   var lineFatal = [];
   var yearsFatal = [];
@@ -299,6 +325,15 @@ function updateLines(data, dataFatal, dataNon_fatal, svgLine, margin, width, hei
 
 function dropdownLines(data, dataFatal, dataNon_fatal, svgLine, margin, width, height, xScale, yScale, country, yAxis, code) {
 
+  /*
+  This function takes as input the code of the country and outputs a lists to
+  update the gridLines
+
+  This function activates:
+  - parseCode
+  - updateFunction
+  */
+
   // empty lists first
   var lineFatal = [];
   var lineNonfatal = [];
@@ -366,6 +401,14 @@ function dropdownLines(data, dataFatal, dataNon_fatal, svgLine, margin, width, h
 }
 
 function Buttons(data, dataFatal, dataNon_fatal, svgLine, margin, width, height, xScale, yScale, country, yAxis, button) {
+
+  /*
+  This function takes as input the name of the button and outputs the updated lines
+
+  This function activates:
+  - parseCountry
+  - updateFunction
+  */
 
   // empty lists first
   var lineFatal = [];

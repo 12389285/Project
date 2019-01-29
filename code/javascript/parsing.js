@@ -1,4 +1,10 @@
 function parseCountry(dataFatal, dataNon_fatal, lineFatal, lineNonfatal, yearsFatal, yearsNonfatal, year) {
+
+ /*
+This function takes as input the fatal dataframe and non fatal dataframe by country
+and parse that data into lists. The functions returns the updated list
+ */
+
   // parsing data fatalities
   dataFatal.forEach(function (d) {
     if (d['Country'] == button) {
@@ -35,6 +41,12 @@ function parseCountry(dataFatal, dataNon_fatal, lineFatal, lineNonfatal, yearsFa
 }
 
 function parseCode(dataFatal, dataNon_fatal, lineFatal, lineNonfatal, yearsFatal, yearsNonfatal, year, code) {
+
+  /*
+ This function takes as input the fatal dataframe and non fatal dataframe by
+ country code and parse that data into lists. The functions returns the updated list
+  */
+
   // parsing data fatalities
   dataFatal.forEach(function (d) {
     if (d['Code|2017'] == code) {

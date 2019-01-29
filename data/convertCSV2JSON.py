@@ -37,7 +37,5 @@ def convert(INPUT_FILE):
     # make json file based on records
     df.reset_index().to_json(OUTPUT_FILE, orient='records')
 
-
-
 if __name__ == "__main__":
     convert(INPUT_FILE)

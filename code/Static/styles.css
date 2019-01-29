@@ -75,9 +75,6 @@ pre
   font-size: 20px;
   fill: black;
 }
-.xText {
-    /* transform: rotate(-45deg); */
-}
 
 /* Add a black background color to the top navigation */
 .topnav {
@@ -108,7 +105,6 @@ pre
     color: white;
 }
 
-/* Columns*/
 p
 {
   font-family: Times !important;
@@ -140,7 +136,6 @@ footer
     border-top: .05rem;
     background-color: lightgrey;
     padding: 15px;
-
 }
 
 .form-control {
@@ -151,22 +146,21 @@ footer
   fill: white;
   stroke: #fff;
   stroke-linejoin: round;
-  }
+}
 
 .d3-tip {
-line-height: 1.5;
-font-weight: 400;
-position: relative;
-font-family: Times, sans-serif;
-padding: 6px;
-background: rgba(0, 0, 0, 0.6);
-color: #FFA500;
-border-radius: 1px;
-pointer-events: none;
+  line-height: 1.5;
+  font-weight: 400;
+  position: relative;
+  font-family: Times, sans-serif;
+  padding: 6px;
+  background: rgba(0, 0, 0, 0.6);
+  color: #FFA500;
+  border-radius: 1px;
+  pointer-events: none;
 }
 
 /* Creates a small triangle extender for the tooltip */
-
 .d3-tip:after {
   box-sizing: border-box;
   display: inline;
@@ -180,7 +174,6 @@ pointer-events: none;
 }
 
 /* Northward tooltips */
-
 .d3-tip.n:after {
   content: "\25BC";
   margin: -1px 0 0 0;
@@ -190,7 +183,6 @@ pointer-events: none;
 }
 
 /* Eastward tooltips */
-
 .d3-tip.e:after {
   content: "\25C0";
   margin: -4px 0 0 0;
@@ -199,7 +191,6 @@ pointer-events: none;
 }
 
 /* Southward tooltips */
-
 .d3-tip.s:after {
   content: "\25B2";
   margin: 0 0 1px 0;
@@ -209,7 +200,6 @@ pointer-events: none;
 }
 
 /* Westward tooltips */
-
 .d3-tip.w:after {
   content: "\25B6";
   margin: -4px 0 0 -1px;
@@ -279,7 +269,6 @@ stroke: steelblue;
 .world:active {
   background-color: lightgrey;
 }
-
 
 .legendLines, .lineTitle, .yLabel {
     font-family: Times;

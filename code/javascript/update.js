@@ -1,5 +1,11 @@
 function updateFunction(lineFatal, lineNonfatal, yearsFatal, yearsNonfatal, xScale, yScale, yAxis, country, svgLine) {
 
+  /*
+  This function takes as input all the lists from the linecharts and outputs the
+  updated coördinates of the lines, axis and grid
+  */
+
+
   // set the x and y values for the fatal line
   var lineF = d3.line()
   .x(function(d, i) { return xScale(yearsFatal[i]) + 20; })

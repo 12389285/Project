@@ -2,6 +2,17 @@ var barWidth = 20;
 
 function Barchart(data, dataIncidents, svgBar, country, number, year) {
 
+  /*
+  This function takes as input the dataframes and svg and outputs the firt bar
+  with tip.
+
+  This function activates:
+  - updateBar
+
+  The functions returns:
+  - barCounter
+  */
+
   let margin = {top: 20, right: 20, bottom: 50, left: 20},
       width = 500 - margin.left - margin.right,
       height = 500 - margin.top - margin.bottom,
@@ -151,7 +162,6 @@ function Barchart(data, dataIncidents, svgBar, country, number, year) {
       }
 
       else {
-
         svgBar.append("g")
           .attr("transform", "translate(75,425)")
           .append("text")
@@ -206,6 +216,15 @@ function Barchart(data, dataIncidents, svgBar, country, number, year) {
 
 function updateBar(data, dataIncidents, svgBar, xScale, yScale, margin, width, height, country, number, year, yAxis) {
 
+  /*
+  This function activates when barCounter is between 2 and 11 takes as input
+  the dataframes, barCounter, number and svg. This function outputs the rest of
+  the bars with tip.
+
+  The functions returns:
+  - barCounter
+  */
+
   // create tip
   var tip = d3.tip()
       .attr('class', 'd3-tip')
@@ -251,7 +270,6 @@ function updateBar(data, dataIncidents, svgBar, xScale, yScale, margin, width, h
   }
 
   else {
-
     svgBar.append("g")
       .attr("transform", "translate(0" + positionX + ",425)")
       .append("text")

@@ -223,3 +223,11 @@ First I used a lot of remove without updating. I decided to make a function wher
 I changed the color scale because the most data is way lower then I had in mind. No the world map is more colored.
 
 I started in one javascript file and in the first two week it was very clear what all the functions are doing. After two weeks I had 1300 code lines and i totally lost control over all the functions. I have decided to split all function in separated files.
+
+I decided to delete the buttons file and put the function in line chart file.
+
+First the plan was to use only the world map to show the selected country in the line chart but for the user it is annoying to constantly scroll up and down to see the actual data. Therefore I have chosen to add a dropdown button with all the countries to the visualization. Also I had some data of a couple parts of the world so I added that information with buttons too.  
+
+### Ideal world
+
+In an ideal world I would have brought more attention to code writing, sometimes I send a lot of variables or data object to function and instead of this way I could have used an easier and more clearly way. I also would put the data page in a modul instead of a page.

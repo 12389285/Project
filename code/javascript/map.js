@@ -2,6 +2,22 @@ domainMap = [0,1,5,10,50,100,250,500,1000,2500,3500]
 
 function Map(data, dataIncidents, svgMap, svgBar, svgLine, dataFatal, dataNon_fatal) {
 
+  /*
+  This function creates the map for year 1970. It takes as input the dataframs
+  and the svg. It creates a map with tooltip, slider and legend.
+
+  This function activates:
+  - Barchart
+  - Linechart
+  - updateMap
+
+
+  The function returns:
+  - year from slider to update map
+  - country and number of attacks to bar chart
+  - country and number of fatalities and injuries to line chart
+  */
+
   width = 800
   height = 450
 
@@ -196,6 +212,19 @@ function Map(data, dataIncidents, svgMap, svgBar, svgLine, dataFatal, dataNon_fa
 }
 
 function updateMap(data, dataIncidents, svgMap, year, color, svgBar, svgLine, dataFatal, dataNon_fatal) {
+
+  /*
+  This function takes as input the year of the slider.
+
+  This function activates:
+  - Barchart
+  - Linechart
+
+  The function returns:
+  - country and number of attacks to bar chart
+  - country and number of fatalities and injuries to line chart
+  - legend
+  */
 
   // get year from slider
   var year = year.getFullYear();

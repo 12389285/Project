@@ -37,6 +37,11 @@ Promise.all(requests).then(function(response) {
 
 function svgSet(data, dataIncidents, dataFatal, dataNon_fatal) {
 
+  /*
+  This function takes as input all the data and outputs all the svg's with
+  the data assigned to svg
+  */
+
   height = 500
   widthMap = 800
   widthBar = 500

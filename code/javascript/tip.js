@@ -1,5 +1,10 @@
 function tipLine(svgLine, lineFatal, lineNonfatal, xScale, yScale, yearsFatal, yearsNonfatal) {
 
+  /*
+  This function creates a tool tip for fatalities and the injuries line.
+  The function takes as input all the lists and scaling and outputs the tooltip
+  */
+
   // tip for fatalities
   var tip = d3.tip()
             .attr('class', 'd3-tip')
