@@ -38,7 +38,7 @@ Promise.all(requests).then(function(response) {
 function svgSet(data, dataIncidents, dataFatal, dataNon_fatal) {
 
   /*
-  This function takes as input all the data and outputs all the svg"s with
+  This function takes as input all the data and outputs all the svg's with
   the data assigned to svg
   */
 
@@ -47,29 +47,29 @@ function svgSet(data, dataIncidents, dataFatal, dataNon_fatal) {
   widthBar = 500
   widthLine = 1310
 
-  // setting svg"s for all visualization
+  // setting svg's for all visualization
   var svgBar = d3.select("#barchart")
       .append("svg")
       .attr("width", widthBar)
       .attr("height", height)
-      .append("g")
-      .attr("class", "bar");
+      .append('g')
+      .attr('class', 'bar');
 
   var svgMap = d3.select("#map")
       .append("svg")
       .attr("class", "mapsvg")
       .attr("width", widthMap)
       .attr("height", height)
-      .append("g")
-      .attr("class", "map");
+      .append('g')
+      .attr('class', 'map');
 
   var svgLine = d3.select("#linechartleft")
       .append("svg")
       .attr("class", "linechart")
       .attr("width", widthLine)
       .attr("height", height)
-      .append("g")
-      .attr("class", "line");
+      .append('g')
+      .attr('class', 'line');
 
   // send data to all functions
   Map(data, dataIncidents, svgMap, svgBar, svgLine, dataFatal, dataNon_fatal);

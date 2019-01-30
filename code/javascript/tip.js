@@ -7,12 +7,12 @@ function tipLine(svgLine, lineFatal, lineNonfatal, xScale, yScale, yearsFatal, y
 
   // tip for fatalities
   var tip = d3.tip()
-            .attr("class", "d3-tip")
+            .attr('class', 'd3-tip')
             .offset([-10, 0])
             .html(function(d,i) {
-              return "<strong>Fatalities: </strong><span style="color:white">"
+              return "<strong>Fatalities: </strong><span style='color:white'>"
                     + d + "</span><br><strong>Year:</strong> \
-                    <span style="color:white">"
+                    <span style='color:white'>"
                     + yearsFatal[i] + "</span>";
               });
 
@@ -30,13 +30,13 @@ function tipLine(svgLine, lineFatal, lineNonfatal, xScale, yScale, yearsFatal, y
   // update tip for line fatal
   d3.select(".linechart").selectAll(".dot")
     .data(lineFatal)
-    .on("mouseover", function (d, i) {
+    .on('mouseover', function (d, i) {
       tip.show(d,i)
       d3.select(this)
       .style("stroke", "white")
       .attr("r", 6)
     })
-    .on("mouseout", function (d) {
+    .on('mouseout', function (d) {
       tip.hide(d)
       d3.select(this)
       .style("stroke", "white")
@@ -45,12 +45,12 @@ function tipLine(svgLine, lineFatal, lineNonfatal, xScale, yScale, yearsFatal, y
 
   // tip for injuries
   var tipN = d3.tip()
-            .attr("class", "d3-tip")
+            .attr('class', 'd3-tip')
             .offset([-10, 0])
             .html(function(d,i) {
-              return "<strong>Injuries: </strong><span style="color:white">"
+              return "<strong>Injuries: </strong><span style='color:white'>"
                     + d + "</span><br><strong>Year:</strong> \
-                    <span style="color:white">"
+                    <span style='color:white'>"
                     + yearsFatal[i] + "</span>";
               });
 
@@ -68,13 +68,13 @@ function tipLine(svgLine, lineFatal, lineNonfatal, xScale, yScale, yearsFatal, y
   // Update tip for line non fatal
   d3.select(".linechart").selectAll(".dotN")
     .data(lineNonfatal)
-    .on("mouseover", function (d, i) {
+    .on('mouseover', function (d, i) {
       tipN.show(d,i)
       d3.select(this)
       .style("stroke", "white")
       .attr("r", 6)
     })
-    .on("mouseout", function (d) {
+    .on('mouseout', function (d) {
       tipN.hide(d)
       d3.select(this)
       .style("stroke", "white")

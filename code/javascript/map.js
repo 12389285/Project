@@ -23,23 +23,23 @@ function Map(data, dataIncidents, svgMap, svgBar, svgLine, dataFatal, dataNon_fa
 
   // Set tooltips
   var tip = d3.tip()
-            .attr("class", "d3-tip")
+            .attr('class', 'd3-tip')
             .html(function(d) {
-              var number = d["Incidents|1970"];
+              var number = d['Incidents|1970'];
               if (number > 0){
                 number = number;
               }
               else if (number == null) {
                 number = "No data";
               }
-              return "<strong>Country: </strong><span class="details">" + d.properties.name + "<br></span>"
-                      + "<strong>Number of attacks: </strong><span class="details">" + number +"</span>";
+              return "<strong>Country: </strong><span class='details'>" + d.properties.name + "<br></span>"
+                      + "<strong>Number of attacks: </strong><span class='details'>" + number +"</span>";
               });
 
   // colorscale for countries
   var color = d3.scaleThreshold()
       .domain(domainMap)
-      .range(["#ffffe0","#add8e6","#a5bcea","#99a1ec","#8c88ec","#7b6ee9","#6755e2","#513cd8","#3725c8","#1a0db0","#00008b"]);
+      .range(['#ffffe0','#add8e6','#a5bcea','#99a1ec','#8c88ec','#7b6ee9','#6755e2','#513cd8','#3725c8','#1a0db0','#00008b']);
 
   var path = d3.geoPath();
 
@@ -55,8 +55,8 @@ function Map(data, dataIncidents, svgMap, svgBar, svgLine, dataFatal, dataNon_fa
   var numberbyCode = {};
 
   // adding data to dictionary for map format
-  dataIncidents.forEach(function(d) { numberbyCode[d["Code|2017"]] = d["Incidents|1970"]; });
-  data.features.forEach(function(d) { d["Incidents|1970"] = numberbyCode[d.id] });
+  dataIncidents.forEach(function(d) { numberbyCode[d['Code|2017']] = d['Incidents|1970']; });
+  data.features.forEach(function(d) { d['Incidents|1970'] = numberbyCode[d.id] });
 
   // worldmap settings
   svgMap.append("g")
@@ -66,9 +66,9 @@ function Map(data, dataIncidents, svgMap, svgBar, svgLine, dataFatal, dataNon_fa
         .enter().append("path")
           .attr("id", function(d) {
             if (numberbyCode[d.id] == undefined) {
-              return "color" + "#ededed"
+              return 'color' + "#ededed"
             }
-              return "color" + color(numberbyCode[d.id])
+              return 'color' + color(numberbyCode[d.id])
           })
           .attr("d", path)
           .style("fill", function(d) {
@@ -76,19 +76,19 @@ function Map(data, dataIncidents, svgMap, svgBar, svgLine, dataFatal, dataNon_fa
               return "#ededed"
             }
               return color(numberbyCode[d.id]); })
-          .style("stroke", "white")
-          .style("stroke-width", 1.5)
+          .style('stroke', 'white')
+          .style('stroke-width', 1.5)
           .style("opacity",0.8)
           .style("stroke","grey")
-          .style("stroke-width", 0.2)
-          .on("mouseover",function(d){
+          .style('stroke-width', 0.2)
+          .on('mouseover',function(d){
             tip.show(d);
             d3.select(this)
               .style("opacity", 1)
               .style("stroke","blue")
               .style("stroke-width",1);
           })
-          .on("mouseout", function(d){
+          .on('mouseout', function(d){
             tip.hide(d);
             d3.select(this)
               .style("opacity", 0.8)
@@ -101,7 +101,7 @@ function Map(data, dataIncidents, svgMap, svgBar, svgLine, dataFatal, dataNon_fa
     .on("click", function(d) {
       barCounter += 1;
       year = 1970
-      Barchart(data, dataIncidents, svgBar, d.properties.name, d["Incidents|1970"], year);
+      Barchart(data, dataIncidents, svgBar, d.properties.name, d['Incidents|1970'], year);
       Linechart(data, dataFatal, dataNon_fatal, svgLine, d.id);
     });
 
@@ -122,38 +122,38 @@ function Map(data, dataIncidents, svgMap, svgBar, svgLine, dataFatal, dataNon_fa
     .max(d3.max(dataTime))
     .step(1000 * 60 * 60 * 24 * 365)
     .width(750)
-    .tickFormat(d3.timeFormat("%Y"))
+    .tickFormat(d3.timeFormat('%Y'))
 
       // slider data to updateMap
-      .on("onchange", val => {
+      .on('onchange', val => {
         updateMap(data, dataIncidents, svgMap, val, color, svgBar, svgLine, dataFatal, dataNon_fatal);
-        d3.select("#mapyear").text(d3.timeFormat("%Y")(val));
+        d3.select('#mapyear').text(d3.timeFormat('%Y')(val));
       });
 
   var gTime = d3
-    .select("div#slider-time")
-    .append("svg")
-    .attr("width", 800)
-    .attr("height", 80)
-    .append("g")
-    .attr("transform", "translate(30,30)");
+    .select('div#slider-time')
+    .append('svg')
+    .attr('width', 800)
+    .attr('height', 80)
+    .append('g')
+    .attr('transform', 'translate(30,30)');
 
   gTime.call(sliderTime);
 
   // add year in left top corner
-  d3.select(".mapsvg")
+  d3.select('.mapsvg')
       .append("text")
         .style("font-size", "25px")
         .attr("id", "mapyear")
-        .attr("transform", "translate(30,40)")
-        .text(d3.timeFormat("%Y")(sliderTime.value()));
+        .attr('transform', 'translate(30,40)')
+        .text(d3.timeFormat('%Y')(sliderTime.value()));
 
   // setting legend
   var linear = d3.scaleOrdinal()
       .domain(["No data","0","1-5","10-50","50-100","100-250","250-500","500-1000","1000-2500","2500-3500",">3500"])
-      .range(["#ededed", "#add8e6","#a5bcea","#99a1ec","#8c88ec","#7b6ee9","#6755e2","#513cd8","#3725c8","#1a0db0","#00008b"]);
+      .range(["#ededed", '#add8e6','#a5bcea','#99a1ec','#8c88ec','#7b6ee9','#6755e2','#513cd8','#3725c8','#1a0db0','#00008b']);
 
-  d3.select(".mapsvg")
+  d3.select('.mapsvg')
       .append("g")
         .attr("class", "legendLinear")
         .attr("transform", "translate(10,300)");
@@ -163,8 +163,8 @@ function Map(data, dataIncidents, svgMap, svgBar, svgLine, dataFatal, dataNon_fa
       .shapePadding(-2)
       .shapeHeight(17)
       .cells(domainMap)
-      .orient("vertical")
-      .on("cellover",function(d){
+      .orient('vertical')
+      .on('cellover',function(d){
 
         // split string to get value for colorscale
         var num = d.split("-");
@@ -183,7 +183,7 @@ function Map(data, dataIncidents, svgMap, svgBar, svgLine, dataFatal, dataNon_fa
         }
 
         // get color id from map with colorfunction
-        svgMap.selectAll("[id="color" + id + ""]")
+        svgMap.selectAll('[id="color' + id + '"]')
           .style("opacity", 1)
           .style("stroke","#800000")
           .style("stroke-width",2);
@@ -193,7 +193,7 @@ function Map(data, dataIncidents, svgMap, svgBar, svgLine, dataFatal, dataNon_fa
           .style("stroke","black")
           .style("stroke-width",1);
       })
-      .on("cellout",function(d){
+      .on('cellout',function(d){
 
         svgMap.selectAll("path")
           .style("opacity", 0.8)
@@ -205,7 +205,7 @@ function Map(data, dataIncidents, svgMap, svgBar, svgLine, dataFatal, dataNon_fa
       })
       .scale(linear);
 
-  svgMap = d3.select(".mapsvg");
+  svgMap = d3.select('.mapsvg');
 
   svgMap.select(".legendLinear")
     .call(legendLinear);
@@ -233,12 +233,12 @@ function updateMap(data, dataIncidents, svgMap, year, color, svgBar, svgLine, da
   var numberbyCode = {};
 
   // adding variable year to string
-  dataIncidents.forEach(function(d) { numberbyCode[d["Code|2017"]] = d["Incidents|" + year]; });
-  data.features.forEach(function(d) { d["Incidents|" + year] = numberbyCode[d.id]});
+  dataIncidents.forEach(function(d) { numberbyCode[d['Code|2017']] = d['Incidents|' + year]; });
+  data.features.forEach(function(d) { d['Incidents|' + year] = numberbyCode[d.id]});
 
   // Set tooltips
   var tip = d3.tip()
-            .attr("class", "d3-tip")
+            .attr('class', 'd3-tip')
             .html(function(d) {
 
               var number = d["Incidents|" + year];
@@ -249,8 +249,8 @@ function updateMap(data, dataIncidents, svgMap, year, color, svgBar, svgLine, da
               else if (number == null) {
                 number = "No data";
               }
-              return "<strong>Country: </strong><span class="details">" + d.properties.name + "<br></span>"
-                      + "<strong>Number of attacks: </strong><span class="details">" + number +"</span>";
+              return "<strong>Country: </strong><span class='details'>" + d.properties.name + "<br></span>"
+                      + "<strong>Number of attacks: </strong><span class='details'>" + number +"</span>";
             })
 
   svgMap.call(tip);
@@ -259,28 +259,28 @@ function updateMap(data, dataIncidents, svgMap, year, color, svgBar, svgLine, da
   svgMap.selectAll("path")
       .attr("id", function(d) {
         if (numberbyCode[d.id] == undefined) {
-          return "color" + "#ededed"
+          return 'color' + "#ededed"
         }
-        return "color" + color(numberbyCode[d.id])})
+        return 'color' + color(numberbyCode[d.id])})
       .style("fill", function(d) {
         if (numberbyCode[d.id] == undefined) {
           return "#ededed"
         }
         return color(numberbyCode[d.id]); })
-      .style("stroke", "white")
-      .style("stroke-width", 1.5)
+      .style('stroke', 'white')
+      .style('stroke-width', 1.5)
       .style("opacity",0.8)
       // tooltips
       .style("stroke","grey")
-      .style("stroke-width", 0.2)
-      .on("mouseover",function(d){
+      .style('stroke-width', 0.2)
+      .on('mouseover',function(d){
         tip.show(d);
         d3.select(this)
           .style("opacity", 1)
           .style("stroke","blue")
           .style("stroke-width",1);
       })
-      .on("mouseout", function(d){
+      .on('mouseout', function(d){
         tip.hide(d);
         d3.select(this)
           .style("opacity", 0.8)
@@ -292,7 +292,7 @@ function updateMap(data, dataIncidents, svgMap, year, color, svgBar, svgLine, da
     d3.selectAll("path")
       .on("click", function(d) {
         barCounter += 1;
-        Barchart(data, dataIncidents, svgBar, d.properties.name, d["Incidents|" + year], year);
+        Barchart(data, dataIncidents, svgBar, d.properties.name, d['Incidents|' + year], year);
         Linechart(data, dataFatal, dataNon_fatal, svgLine, d.id);
       });
 
@@ -302,9 +302,9 @@ function updateMap(data, dataIncidents, svgMap, year, color, svgBar, svgLine, da
 
     var linear = d3.scaleOrdinal()
       .domain(["No data","0","1-5","10-50","50-100","100-250","250-500","500-1000","1000-2500","2500-3500",">3500"])
-      .range(["#ededed", "#add8e6","#a5bcea","#99a1ec","#8c88ec","#7b6ee9","#6755e2","#513cd8","#3725c8","#1a0db0","#00008b"]);
+      .range(["#ededed", '#add8e6','#a5bcea','#99a1ec','#8c88ec','#7b6ee9','#6755e2','#513cd8','#3725c8','#1a0db0','#00008b']);
 
-    d3.select(".mapsvg")
+    d3.select('.mapsvg')
       .append("g")
       .attr("class", "legendLinear")
       .attr("transform", "translate(10,300)");
@@ -314,8 +314,8 @@ function updateMap(data, dataIncidents, svgMap, year, color, svgBar, svgLine, da
       .shapePadding(-2)
       .shapeHeight(17)
       .cells(domainMap)
-      .orient("vertical")
-      .on("cellover",function(d){
+      .orient('vertical')
+      .on('cellover',function(d){
 
         // split string to get value for colorscale
         var num = d.split("-");
@@ -334,7 +334,7 @@ function updateMap(data, dataIncidents, svgMap, year, color, svgBar, svgLine, da
         }
 
         // get color id from map with colorfunction
-        svgMap.selectAll("[id="color" + id + ""]")
+        svgMap.selectAll('[id="color' + id + '"]')
           .style("opacity", 1)
           .style("stroke","#800000")
           .style("stroke-width",2);
@@ -344,7 +344,7 @@ function updateMap(data, dataIncidents, svgMap, year, color, svgBar, svgLine, da
           .style("stroke","black")
           .style("stroke-width",1);
       })
-      .on("cellout",function(d){
+      .on('cellout',function(d){
 
         svgMap.selectAll("path")
           .style("opacity", 0.8)
@@ -356,7 +356,7 @@ function updateMap(data, dataIncidents, svgMap, year, color, svgBar, svgLine, da
       })
       .scale(linear);
 
-    svgMap = d3.select(".mapsvg");
+    svgMap = d3.select('.mapsvg');
 
     svgMap.select(".legendLinear")
       .call(legendLinear);

@@ -198,12 +198,12 @@ function Linechart(data, dataFatal, dataNon_fatal, svgLine, country) {
       .style("stroke", "#dc143c")
       .style("stroke-width", "2px")
       .attr("d", lineW)
-      .on("mouseover", function (d, i) {
+      .on('mouseover', function (d, i) {
           d3.select(this)
           .style("stroke", "grey")
           .style("stroke-width", 4)
         })
-          .on("mouseout", function (d) {
+          .on('mouseout', function (d) {
             d3.select(this)
             .style("stroke", "#dc143c")
             .style("stroke-width", 2)
@@ -216,12 +216,12 @@ function Linechart(data, dataFatal, dataNon_fatal, svgLine, country) {
       .style("stroke", "#4073dc")
       .style("stroke-width", "2px")
       .attr("d", lineWN)
-      .on("mouseover", function (d, i) {
+      .on('mouseover', function (d, i) {
           d3.select(this)
           .style("stroke", "grey")
           .style("stroke-width", 4)
         })
-          .on("mouseout", function (d) {
+          .on('mouseout', function (d) {
             d3.select(this)
             .style("stroke", "#4073dc")
             .style("stroke-width", 2)
