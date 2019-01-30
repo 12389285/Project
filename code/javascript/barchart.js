@@ -85,12 +85,12 @@ function Barchart(data, dataIncidents, svgBar, country, number, year) {
 
   // create tip
   var tip = d3.tip()
-      .attr('class', 'd3-tip')
+      .attr("class", "d3-tip")
       .offset([-10, 0])
       .html(function(d) {
-        return "<strong>Country:</strong> <span style='color:white'>"
+        return "<strong>Country:</strong> <span style="color:white">"
               + country + "</span><br><strong>Attacks:</strong> \
-              <span style='color:white'>"
+              <span style="color:white">"
               + number + "</span>";
       });
 
@@ -146,8 +146,8 @@ function Barchart(data, dataIncidents, svgBar, country, number, year) {
           .attr("height", function (d) {
             return height - yScale(number);
           })
-          .on('mouseover', tip.show)
-          .on('mouseout', tip.hide);
+          .on("mouseover", tip.show)
+          .on("mouseout", tip.hide);
 
         // create xaxis text
         svgBar.append("g")
@@ -227,12 +227,12 @@ function updateBar(data, dataIncidents, svgBar, xScale, yScale, margin, width, h
 
   // create tip
   var tip = d3.tip()
-      .attr('class', 'd3-tip')
+      .attr("class", "d3-tip")
       .offset([-10, 0])
       .html(function(d) {
-        return "<strong>Country:</strong> <span style='color:white'>"
+        return "<strong>Country:</strong> <span style="color:white">"
               + country + "</span><br><strong>Attacks:</strong> \
-              <span style='color:white'>"
+              <span style="color:white">"
               + number + "</span>";
       });
 
@@ -254,8 +254,8 @@ function updateBar(data, dataIncidents, svgBar, xScale, yScale, margin, width, h
         .attr("height", function (d) {
           return height - yScale(number);
         })
-        .on('mouseover', tip.show)
-        .on('mouseout', tip.hide);
+        .on("mouseover", tip.show)
+        .on("mouseout", tip.hide);
 
     // create xaxis text
     svgBar.append("g")

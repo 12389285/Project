@@ -66,7 +66,7 @@ function updateFunction(lineFatal, lineNonfatal, yearsFatal, yearsNonfatal, xSca
   updateFatal.exit().remove();
 
   // update line injuries
-  var updateNon = d3.selectAll('#linechartNonfatal')
+  var updateNon = d3.selectAll("#linechartNonfatal")
     .datum(lineNonfatal);
   updateNon.enter()
     .select("path")

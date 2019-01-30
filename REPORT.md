@@ -198,6 +198,14 @@ Hackathon
 * Added README, LICENSE, REPORT Files
 * Moved dropdown en buttons function to line chart file
 
+# Day 16
+
+29/01/2019
+
+* Added all function comments
+* Made the script and made the product video
+* made pages with github
+
 ## Important decisions
 
 ### Visualization

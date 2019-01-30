@@ -156,3 +156,4 @@ Hackathon
 
 * Added all function comments
 * Made the script and made the product video
+* made pages with github

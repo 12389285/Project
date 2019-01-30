@@ -7,7 +7,7 @@ and parse that data into lists. The functions returns the updated list
 
   // parsing data fatalities
   dataFatal.forEach(function (d) {
-    if (d['Country'] == button) {
+    if (d["Country"] == button) {
       currentCountry = d["Country"];
       year = 1970;
       yearsFatal.push(year);
@@ -24,7 +24,7 @@ and parse that data into lists. The functions returns the updated list
 
   // parsing data injuries
   dataNon_fatal.forEach(function (d) {
-    if (d['Country'] == button) {
+    if (d["Country"] == button) {
       currentCountryN = d["Country"];
       year = 1970;
       yearsNonfatal.push(year);
@@ -49,7 +49,7 @@ function parseCode(dataFatal, dataNon_fatal, lineFatal, lineNonfatal, yearsFatal
 
   // parsing data fatalities
   dataFatal.forEach(function (d) {
-    if (d['Code|2017'] == code) {
+    if (d["Code|2017"] == code) {
       currentCountry = d["Country"];
       year = 1970;
       yearsFatal.push(year);
@@ -66,7 +66,7 @@ function parseCode(dataFatal, dataNon_fatal, lineFatal, lineNonfatal, yearsFatal
 
   // parsing data injuries
   dataNon_fatal.forEach(function (d) {
-    if (d['Code|2017'] == code) {
+    if (d["Code|2017"] == code) {
       currentCountryN = d["Country"];
       year = 1970;
       yearsNonfatal.push(year);
