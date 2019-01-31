@@ -2,11 +2,7 @@
 
 ## Source
 
-Copy paste the link below in your URL bar to see the visualization
-
-```
 https://12389285.github.io/Project/
-```
 
 ## Product video
 

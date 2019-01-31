@@ -1,5 +1,15 @@
 # Final report
 
+## URL Links
+
+### Webpage
+
+https://12389285.github.io/Project/
+
+### Product video
+
+https://vimeo.com/314506941
+
 ## Description
 
 In the background page The user can find some background information and some instructions for the visualization.
@@ -198,13 +208,18 @@ Hackathon
 * Added README, LICENSE, REPORT Files
 * Moved dropdown en buttons function to line chart file
 
-# Day 16
+### Day 16
 
 29/01/2019
 
 * Added all function comments
 * Made the script and made the product video
 * made pages with github
+
+### Day 17
+
+* Finished product video
+* Finished report
 
 ## Important decisions
 
