@@ -8,6 +8,10 @@ Copy paste the link below in your URL bar to see the visualization
 https://12389285.github.io/Project/
 ```
 
+## Product video
+
+https://vimeo.com/314506941
+
 ## Purpose
 
 In the background page The user can find some background information and some instructions for the visualization.
